@@ -9,28 +9,30 @@ import findPathAstarUtils  from '../utils/utils';
 const cell = {
   isOpend: false,
   isClosed: false,
-  xCoordinate:null,
-  yCoordinate:null,
+  gridColumn:null,
+  gridRow:null,
   visited: false,
   selected: false,
   isStart: false,
   isTarget: false,
   Fn:0,
   Gn:0,
-  Hn:0
+  Hn:0,
+  parent:''
 };
 
 function initializeStartAndTarget(cols, rows) {
-  let xStartingCell = Math.floor(Math.random() * cols);
-  let yStartingCell = Math.floor(Math.random() * rows);
-  let xTargetCell = Math.floor(Math.random() * cols);
-  let yTargetCell = Math.floor(Math.random() * rows);
+  
+  let colStart = Math.floor(Math.random() * cols);
+  let rowStart = Math.floor(Math.random() * rows);
+  let colTarget = Math.floor(Math.random() * cols);
+  let rowTarget = Math.floor(Math.random() * rows);
 
-  if (xTargetCell === xStartingCell && yTargetCell === yStartingCell) {
-    xTargetCell = (xTargetCell + 10) % cols;
-    yTargetCell = (yTargetCell + 10) % rows;
+  if (colTarget === colStart && rowTarget === rowStart) {
+    colTarget = (colTarget + 10) % cols;
+    rowTarget = (rowTarget + 10) % rows;
   }
-  return { xStartingCell, yStartingCell, xTargetCell, yTargetCell };
+  return { rowStart, colStart, rowTarget ,colTarget };
 }
 
 
@@ -51,42 +53,47 @@ function Grid({chosenAlgo}) {
   const [target, setTarget] = useState([]);
   
   useEffect(() => {
+  
     if (board.length === 0){
       let rows = 25;
       let cols = 45;
       let newBoard = [];
-      for (let col = 0; col < cols; col++){
+      for (let row = 0; row < rows; row++){
         newBoard.push([]);
-        for (let row = 0; row < rows; row++){
-          newBoard[col].push({...cell, xCoordinate: col, yCoordinate: row})
+        for (let col = 0; col < cols; col++){
+          newBoard[row].push({...cell, gridColumn: col, gridRow: row})
         }
       }
       
-      let { xStartingCell, yStartingCell, xTargetCell, yTargetCell } = initializeStartAndTarget(cols, rows);   
+      let { rowStart, colStart, rowTarget, colTarget } = initializeStartAndTarget(cols, rows);   
 
-      console.log(xStartingCell, yStartingCell, xTargetCell, yTargetCell);
-      newBoard[xStartingCell][yStartingCell].isStart = true;
-      newBoard[xTargetCell][yTargetCell].isTarget = true;
-      setStart([xStartingCell, yStartingCell]);
-      setTarget([xTargetCell, yTargetCell]);
+      console.log(rowStart, colStart, rowTarget, colTarget);
+      newBoard[rowStart][colStart].isStart = true;
+      newBoard[rowTarget][colTarget].isTarget = true;
+      setStart([rowStart, colStart]);
+      setTarget([rowTarget, colTarget]);
 
       console.log(newBoard);
       setBoard(newBoard);
 
     }
-    
-    console.log('effect called');
     return () => {}
-  }, [board.length])
+  }, [board])
 
 
   useEffect(() => {
 
-    setAlgorithm(chosenAlgo);
+    if (chosenAlgo === Algorithm) {
+      console.log('Returning from UseEffect - Algorithm was not changed :', Algorithm);
+      return;
+    }
 
-    switch (Algorithm){
+    setAlgorithm(chosenAlgo);
+    
+    switch (chosenAlgo){
       case 'A*':
-        setBoard(findPathAstar(start, target, board));
+        let newBoard = findPathAstar(start, target, board);
+        setBoard([...newBoard]);
         break;
 
       case 'dijkstra':
@@ -102,9 +109,10 @@ function Grid({chosenAlgo}) {
     return () => {};
   }, [Algorithm, start, target, board, chosenAlgo])
 
+
   return (
     <div className="grid-wrapper">
-      {board.map((col, colIdx) => col.map((cell,cellIdx) => <GridCell key={`${colIdx}-${cellIdx}`} cellData={cell}></GridCell>))}
+      {board.map((row, rowIdx) => row.map((cell, cellIdx) => <GridCell key={`${rowIdx}-${cellIdx}`} id={`${rowIdx}-${cellIdx}`} cellData={cell}></GridCell>))}
     </div>
   )
 

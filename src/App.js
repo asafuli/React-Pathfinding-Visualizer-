@@ -5,9 +5,9 @@ import IconList from './components/IconList';
 import Grid from './components/Grid';
 
 function App() {
+  
   const [ChosenAlgo, setChosenAlgo] = useState('None');
-  console.log('ChosenAlgo :', ChosenAlgo );
-
+  
   const updateChosenAlgo = (chosenAlgo) => {
     setChosenAlgo(chosenAlgo);
   };

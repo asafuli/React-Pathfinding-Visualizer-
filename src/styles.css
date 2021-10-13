@@ -1,3 +1,9 @@
+
+:root {
+  --grid-width: 45;
+  --grid-cell-width: calc(100vw / (var(--grid-width) + 5));
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -33,7 +39,7 @@
 
 .grid-wrapper {
   display: grid;
-  grid-template-columns: repeat(45, minmax(calc(100vw/50),calc(100vw/50)));
+  grid-template-columns: repeat(var(--grid-width), minmax(var(--grid-cell-width),var(--grid-cell-width)));
   margin: 0 0.5rem 0 0.5rem;
 }
 
@@ -44,8 +50,8 @@
 }
 
 .grid-cell-item {
-  width: calc(100vw/50);
-  height: calc(100vw/50);
+  width: var(--grid-cell-width);
+  height: var(--grid-cell-width);
   border: 1px solid cyan;
 }
 

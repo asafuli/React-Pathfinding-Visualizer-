@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function GridCell({cellData}) {
+function GridCell({cellData, id}) {
 
   const [Data, setData] = useState(cellData);
 
@@ -17,8 +17,8 @@ function GridCell({cellData}) {
 
 
   return (
-    <div className="grid-cell-wrapper">
-      <div className={`grid-cell-item ${cellStyle.selected} ${cellStyle.isStart} ${cellStyle.isTarget}`}  onClick={(e) => handleClick(e)} >
+    <div className="grid-cell-wrapper"  id={id}>
+      <div className={`grid-cell-item ${cellStyle.selected} ${cellStyle.isStart} ${cellStyle.isTarget}`} id={id}  onClick={(e) => handleClick(e)} >
       
       </div>
     </div>
