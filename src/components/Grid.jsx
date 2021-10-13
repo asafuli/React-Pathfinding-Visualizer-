@@ -55,18 +55,18 @@ function Grid({chosenAlgo}) {
       let rows = 25;
       let cols = 45;
       let newBoard = [];
-      for (let row = 0; row < rows; row++){
+      for (let col = 0; col < cols; col++){
         newBoard.push([]);
-        for (let col = 0; col < cols; col++){
-          newBoard[row].push({...cell, xCoordinate: col, yCoordinate: row})
+        for (let row = 0; row < rows; row++){
+          newBoard[col].push({...cell, xCoordinate: col, yCoordinate: row})
         }
       }
       
       let { xStartingCell, yStartingCell, xTargetCell, yTargetCell } = initializeStartAndTarget(cols, rows);   
 
       console.log(xStartingCell, yStartingCell, xTargetCell, yTargetCell);
-      newBoard[yStartingCell][xStartingCell].isStart = true;
-      newBoard[yTargetCell][xTargetCell].isTarget = true;
+      newBoard[xStartingCell][yStartingCell].isStart = true;
+      newBoard[xTargetCell][yTargetCell].isTarget = true;
       setStart([xStartingCell, yStartingCell]);
       setTarget([xTargetCell, yTargetCell]);
 
@@ -104,7 +104,7 @@ function Grid({chosenAlgo}) {
 
   return (
     <div className="grid-wrapper">
-      {board.map((row, rowIdx) => row.map((cell,cellIdx) => <GridCell key={`${rowIdx}-${cellIdx}`} cellData={cell}></GridCell>))}
+      {board.map((col, colIdx) => col.map((cell,cellIdx) => <GridCell key={`${colIdx}-${cellIdx}`} cellData={cell}></GridCell>))}
     </div>
   )
 

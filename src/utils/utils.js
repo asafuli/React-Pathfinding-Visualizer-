@@ -1,9 +1,23 @@
 export default function findPathAstarUtils(start, end, board) {
+  let [xStart, yStart] = start;
+  let [xEnd, yEnd] = end;
+
+  console.log(xStart, yStart);
+
   //INIT G(n), H(n) for each cell
-  console.log(2222);
   let grid = initGrid(start, end, board);
-  let curr = grid[(start[0], end[0])];
+  let curr = grid[start[0]][start[1]];
   let currNeighbours = [];
+  currNeighbours.push(
+    grid[xStart + 1][yStart],
+    grid[start[0]][start[1] - 1],
+    grid[start[0] - 1][start[1]],
+    grid[start[0]][start[1] + 1]
+  );
+  currNeighbours.map((el) => {
+    grid[el.xCoordinate][el.yCoordinate].selected = true;
+  });
+  console.log(grid);
   return grid;
 }
 
