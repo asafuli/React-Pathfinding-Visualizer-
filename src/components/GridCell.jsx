@@ -12,13 +12,14 @@ function GridCell({cellData, id}) {
   let cellStyle = { 
     selected: Data.selected ? 'selected' : '',
     isStart: Data.isStart ? 'starting-cell' : '',
-    isTarget: Data.isTarget ? 'target-cell' : ''
+    isTarget: Data.isTarget ? 'target-cell' : '',
+    visited: Data.visited ? 'visited' : ''
   };
 
 
   return (
     <div className="grid-cell-wrapper"  id={id}>
-      <div className={`grid-cell-item ${cellStyle.selected} ${cellStyle.isStart} ${cellStyle.isTarget}`} id={id}  onClick={(e) => handleClick(e)} >
+      <div className={`grid-cell-item ${cellStyle.selected} ${cellStyle.isStart} ${cellStyle.isTarget} ${cellStyle.visited}`} id={id}  onClick={(e) => handleClick(e)} >
       
       </div>
     </div>

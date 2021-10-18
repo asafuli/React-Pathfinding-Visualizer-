@@ -51,7 +51,10 @@ function Grid({chosenAlgo}) {
   const [Algorithm, setAlgorithm] = useState(chosenAlgo); 
   const [start, setStart] = useState([]);
   const [target, setTarget] = useState([]);
-  
+  const [visited, setVisited] = useState([]);
+  const [done, setDone] = useState(false);
+  const [visitedCounter, setVisitedCounter] = useState(0);
+
   useEffect(() => {
   
     if (board.length === 0){
@@ -92,8 +95,10 @@ function Grid({chosenAlgo}) {
     
     switch (chosenAlgo){
       case 'A*':
-        let newBoard = findPathAstar(start, target, board);
+        let {grid : newBoard, visited: newVisited} = findPathAstar(start, target, board);
         setBoard([...newBoard]);
+        setVisited([...newVisited]);
+        setDone(true);
         break;
 
       case 'dijkstra':
@@ -109,6 +114,27 @@ function Grid({chosenAlgo}) {
     return () => {};
   }, [Algorithm, start, target, board, chosenAlgo])
 
+
+  useEffect(
+    () => {
+      let counter = visitedCounter;
+      let paintVisitedInterval = setInterval(() => {
+        //debugger;
+        let newVisited = [...visited];
+        if (newVisited.length === 0 || counter === newVisited.length) {
+          clearInterval(paintVisitedInterval);
+          return;
+        }
+        //console.log(i)
+        newVisited[counter].visited = true;
+        setVisitedCounter(counter + 1);
+        return setVisited(newVisited)
+       } 
+       ,100, visited, counter
+      );
+    },
+    [done, visited]
+  );
 
   return (
     <div className="grid-wrapper">
