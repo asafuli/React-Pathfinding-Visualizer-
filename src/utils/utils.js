@@ -7,32 +7,62 @@ export default function findPathAstarUtils(start, end, board) {
 
   let opened = [];
   let closed = [];
+  let currNeighbours = [];
   let gridColumn, gridRow, curr;
 
   opened.push(grid[rowStart][colStart]);
-  opened[0].parent = 
+  opened[0].parent = opened[0];
+  opened[0].Gn = 0;
+  opened[0].Fn = opened[0].Gn + opened[0].Hn;
 
-  while(opened.length > 0){
-
+  while (opened.length > 0) {
     curr = opened.shift();
-    if 
-    ({gridColumn, gridRow}  = curr);
-    let currNeighbours = [];
-    currNeighbours.push(
-      grid[gridRow + 1][gridColumn],
-      grid[gridRow][gridColumn - 1],
-      grid[gridRow - 1][gridColumn],
-      grid[gridRow][gridColumn + 1]
-    );
-    
-    
+    if (curr.gridRow === rowEnd && curr.gridColumn === colEnd) {
+      console.log('FOUND PATH', curr);
+      break;
+    }
 
+    ({ gridColumn, gridRow } = curr);
+
+    currNeighbours.push(
+      gridRow + 1 <= board.length && grid[gridRow + 1][gridColumn],
+      gridColumn > 0 && grid[gridRow][gridColumn - 1],
+      gridRow > 0 && grid[gridRow - 1][gridColumn],
+      gridColumn + 1 <= board[0].length && grid[gridRow][gridColumn + 1]
+    );
+
+    currNeighbours.map((el) => {
+      if (el === false || typeof el == 'undefined' || closed.includes(el))
+        return;
+      // Calculate Gn for all Neighbours
+      el.Gn =
+        curr.Gn +
+        Math.abs(curr.gridRow - el.gridRow) +
+        Math.abs(curr.gridColumn - el.gridColumn);
+      el.Fn = el.Gn + el.Hn;
+
+      el.parent = curr;
+
+      //Add all curr neighbours to opened list
+      if (!opened.includes(el)) opened.push(el);
+
+      //el.selected = true;
+    });
+
+    opened.sort((n1, n2) => n1.Fn - n2.Fn);
+    closed.push(curr);
+
+    //Cleanup
+    currNeighbours.splice(0, currNeighbours.length);
   }
 
-    
-  currNeighbours.map((el) => {
-    grid[el.gridRow][el.gridColumn].selected = true;
-  });
+  let parent = grid[rowEnd][colEnd].parent;
+  let path = [];
+  while (parent !== grid[rowStart][colStart]) {
+    path.push(parent);
+    parent.selected = true;
+    parent = parent.parent;
+  }
   return grid;
 }
 
