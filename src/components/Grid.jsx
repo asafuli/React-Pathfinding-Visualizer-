@@ -118,24 +118,24 @@ function Grid({chosenAlgo}) {
   useEffect(
     () => {
       
-      let paintVisitedInterval = setInterval(() => {
+      // debugger
+      let paintVisitedInterval = setTimeout(() => {
 
        
         let newVisited = [...visited];
-        if (newVisited.length === 0 || visitedCounter === newVisited.length) {
+        if (newVisited.length === 0 || visitedCounter >= newVisited.length) {
           //debugger;
-          clearInterval(paintVisitedInterval);
+          clearTimeout(paintVisitedInterval);
           return;
         }
-        
         newVisited[visitedCounter].visited = true;
         setVisitedCounter(visitedCounter => visitedCounter + 1);
         return setVisited(visited => newVisited)
        } 
-       ,1
+       , 1
       );
     },
-    [done, visited]
+    [done, visited, visitedCounter]
   );
 
 
