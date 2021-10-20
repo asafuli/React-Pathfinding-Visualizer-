@@ -20,6 +20,9 @@ export default function findPathAstarUtils(start, end, board) {
 
   while (opened.length > 0) {
     curr = opened.shift();
+    if (!visited.includes(curr)) visited.push(curr);
+
+    // console.log(curr);
     if (curr.gridRow === rowEnd && curr.gridColumn === colEnd) {
       console.log('FOUND PATH', curr);
       break;
@@ -46,12 +49,18 @@ export default function findPathAstarUtils(start, end, board) {
 
       el.parent = curr;
 
+      let indexOfNeighbour = opened.indexOf(el);
       //Add all curr neighbours to opened list
-      if (!opened.includes(el)) opened.push(el);
-
-      if (!visited.includes(el)) visited.push(el);
-
-      //el.selected = true;
+      if (indexOfNeighbour !== -1) {
+        opened[indexOfNeighbour].Gn =
+          opened[indexOfNeighbour].Gn > el.Gn
+            ? el.Gn
+            : opened[indexOfNeighbour].Gn;
+        opened[indexOfNeighbour].Fn =
+          opened[indexOfNeighbour].Gn + opened[indexOfNeighbour].Hn;
+      } else {
+        opened.push(el);
+      }
     });
 
     opened.sort((n1, n2) => n1.Fn - n2.Fn);
@@ -66,10 +75,9 @@ export default function findPathAstarUtils(start, end, board) {
   let path = [];
   while (parent !== grid[rowStart][colStart]) {
     path.push(parent);
-    parent.selected = true;
     parent = parent.parent;
   }
-  return { grid, visited };
+  return { grid, visited, path };
 }
 
 const initGrid = ([rowStart, colStart], [rowEnd, colEnd], board) => {

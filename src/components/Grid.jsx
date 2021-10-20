@@ -54,6 +54,9 @@ function Grid({chosenAlgo}) {
   const [visited, setVisited] = useState([]);
   const [done, setDone] = useState(false);
   const [visitedCounter, setVisitedCounter] = useState(0);
+  const [path, setPath] = useState([]);
+  const [pathCounter, setPathCounter] = useState(0);
+  const [visitedAnimation, setVisitedAnimation] = useState(false);
 
   useEffect(() => {
   
@@ -88,6 +91,7 @@ function Grid({chosenAlgo}) {
 
     if (chosenAlgo === Algorithm) {
       console.log('Returning from UseEffect - Algorithm was not changed :', Algorithm);
+      
       return;
     }
 
@@ -95,9 +99,11 @@ function Grid({chosenAlgo}) {
     
     switch (chosenAlgo){
       case 'A*':
-        let {grid : newBoard, visited: newVisited} = findPathAstar(start, target, board);
-        setBoard([...newBoard]);
-        setVisited([...newVisited]);
+        let {grid : newBoard, visited: newVisited, path: newPath} = findPathAstar(start, target, board);
+        setBoard(board => newBoard);
+        setVisited(visited => newVisited);
+        setPath(path => newPath)
+        setPathCounter(pathCounter => newPath.length - 1)
         setDone(true);
         break;
 
@@ -121,27 +127,48 @@ function Grid({chosenAlgo}) {
       // debugger
       let paintVisitedInterval = setTimeout(() => {
 
-       
-        let newVisited = [...visited];
-        if (newVisited.length === 0 || visitedCounter >= newVisited.length) {
+        if (visited.length === 0 || visitedCounter >= visited.length) {
           //debugger;
+          if (visitedCounter >= visited.length && visited.length > 0){
+            setVisitedAnimation(visitedAnimation => true);
+          }
           clearTimeout(paintVisitedInterval);
           return;
         }
-        newVisited[visitedCounter].visited = true;
+        visited[visitedCounter].visited = true;
         setVisitedCounter(visitedCounter => visitedCounter + 1);
-        return setVisited(visited => newVisited)
+        return setVisited(visited => visited)
        } 
        , 1
       );
+
     },
-    [done, visited, visitedCounter]
+    [done, visited, visitedCounter,visitedAnimation]
   );
 
+  useEffect(() => {
 
-  
+    if (visitedAnimation){
+      //debugger;
+      let paintSelectedInterval = setTimeout(() => {
+
+        if (path.length === 0 || pathCounter < 0) {
+          //debugger;
+         clearTimeout(paintSelectedInterval);
+          return;
+        }
+        path[pathCounter].selected = true;
+        setPathCounter(pathCounter => pathCounter - 1);
+        console.log(path[pathCounter])
+        return setPath(path => path)
+       }, 1)
+    }
+  }, [pathCounter, path.length, path, visitedAnimation]);
+
+ 
 
   return (
+
     <div className="grid-wrapper">
       {board.map((row, rowIdx) => row.map((cell, cellIdx) => <GridCell key={`${rowIdx}-${cellIdx}`} id={`${rowIdx}-${cellIdx}`} cellData={cell}></GridCell>))}
     </div>

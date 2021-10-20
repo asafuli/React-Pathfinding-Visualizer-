@@ -60,29 +60,22 @@
   background-color: black;
 }
 
-.selected {
-  background-color: black;
-}
-
 .visited {
-  animation-name: fillColorAnimation;
-  animation-duration: 0.3s;
+  animation-name: visitedAnimation;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-delay: 0;
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-iteration-count: 1;
   animation-direction: alternate;
-
-  background-color: greenyellow;
 }
 
-
-@keyframes fillColorAnimation {
+@keyframes visitedAnimation {
   0% {
     transform: scale(0.3);
     background-color: rgba(4, 41, 30, 0.75);
-    border-radius: 100%;
+    border-radius: 70%;
   }
 
   50% {
@@ -100,12 +93,44 @@
   }
 }
 
-
-
 .starting-cell {
-  background-color: blue;
+  background-color: blue !important;
 }
 
 .target-cell {
-  background-color: red;
+  background-color: red !important;
+}
+
+.selected {
+  animation-name: selectedAnimation;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  background-color: black !important;
+}
+
+@keyframes selectedAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: rgba(156, 162, 160, 0.75);
+    border-radius: 70%;
+  }
+
+  50% {
+    background-color: rgba(94, 100, 86, 0.75);
+  }
+
+  75% {
+    transform: scale(1.2);
+    background-color: rgba(45, 46, 42, 0.75);
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.75);
+  }
 }
