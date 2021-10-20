@@ -101,6 +101,12 @@
   background-color: red !important;
 }
 
+.wall {
+  background-image: url('./static/images/wall.png');
+  background-size: cover;
+  background-color: black;
+}
+
 .selected {
   animation-name: selectedAnimation;
   animation-duration: 0.5s;

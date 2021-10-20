@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import GridCell from './GridCell';
 import findPathAstarUtils  from '../utils/utils';
 
+
 // Extracted cell outside of the function component in order to avoid reinstantiation on every Render 
 // Warning was useEffect : https://stackoverflow.com/questions/65321359/how-to-fix-warning-function-makes-the-dependencies-of-useeffect-hook-change
 
@@ -15,6 +16,7 @@ const cell = {
   selected: false,
   isStart: false,
   isTarget: false,
+  isWall:false,
   Fn:0,
   Gn:0,
   Hn:0,
@@ -57,6 +59,12 @@ function Grid({chosenAlgo}) {
   const [path, setPath] = useState([]);
   const [pathCounter, setPathCounter] = useState(0);
   const [visitedAnimation, setVisitedAnimation] = useState(false);
+  
+
+
+  const toggleWall = () => {
+    setBoard(board => board)
+  }
 
   useEffect(() => {
   
@@ -170,7 +178,7 @@ function Grid({chosenAlgo}) {
   return (
 
     <div className="grid-wrapper">
-      {board.map((row, rowIdx) => row.map((cell, cellIdx) => <GridCell key={`${rowIdx}-${cellIdx}`} id={`${rowIdx}-${cellIdx}`} cellData={cell}></GridCell>))}
+    {board.map((row, rowIdx) => row.map((cell, cellIdx) => <GridCell key={`${rowIdx}-${cellIdx}`} id={`${rowIdx}-${cellIdx}`} cellData={cell} onClick={toggleWall}></GridCell>))}
     </div>
   )
 

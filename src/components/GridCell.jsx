@@ -1,25 +1,26 @@
 import React, {useState} from 'react'
 
-function GridCell({cellData, id}) {
+function GridCell({cellData: {isWall , selected, isStart, isTarget, visited} , id, onClick}) {
 
-  const [Data, setData] = useState(cellData);
+  const [wall, setWall] = useState(isWall);
 
   const handleClick = (e) => {
-    setData({...Data, selected: !Data.selected} )
-    console.log(Data)
+    setWall(wall => !wall)
+    onClick();
   }
   
   let cellStyle = { 
-    selected: Data.selected ? 'selected' : '',
-    isStart: Data.isStart ? 'starting-cell' : '',
-    isTarget: Data.isTarget ? 'target-cell' : '',
-    visited: Data.visited ? 'visited' : ''
+    selected: selected ? 'selected' : '',
+    isStart: isStart ? 'starting-cell' : '',
+    isTarget: isTarget ? 'target-cell' : '',
+    visited: visited ? 'visited' : '',
+    wall: wall ? 'wall' : ''
   };
 
 
   return (
     <div className="grid-cell-wrapper"  id={id}>
-      <div className={`grid-cell-item ${cellStyle.selected} ${cellStyle.isStart} ${cellStyle.isTarget} ${cellStyle.visited}`} id={id}  onClick={(e) => handleClick(e)} >
+      <div className={`grid-cell-item ${cellStyle.selected} ${cellStyle.isStart} ${cellStyle.isTarget} ${cellStyle.visited} ${cellStyle.wall}`} id={id}  onClick={(e) => handleClick(e)} >
       
       </div>
     </div>

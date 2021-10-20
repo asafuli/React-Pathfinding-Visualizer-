@@ -22,7 +22,6 @@ export default function findPathAstarUtils(start, end, board) {
     curr = opened.shift();
     if (!visited.includes(curr)) visited.push(curr);
 
-    // console.log(curr);
     if (curr.gridRow === rowEnd && curr.gridColumn === colEnd) {
       console.log('FOUND PATH', curr);
       break;
@@ -38,8 +37,15 @@ export default function findPathAstarUtils(start, end, board) {
     );
 
     currNeighbours.map((el) => {
-      if (el === false || typeof el == 'undefined' || closed.includes(el))
+      if (
+        el === false ||
+        typeof el == 'undefined' ||
+        el.isWall ||
+        closed.includes(el)
+      ) {
+        debugger;
         return;
+      }
       // Calculate Gn for all Neighbours
       el.Gn =
         curr.Gn +
@@ -66,11 +72,11 @@ export default function findPathAstarUtils(start, end, board) {
     opened.sort((n1, n2) => n1.Fn - n2.Fn);
     closed.push(curr);
 
-    //visited.map((el) => (el.visited = true));
     //Cleanup
     currNeighbours.splice(0, currNeighbours.length);
   }
 
+  //Build path
   let parent = grid[rowEnd][colEnd].parent;
   let path = [];
   while (parent !== grid[rowStart][colStart]) {
