@@ -69,13 +69,13 @@ function Grid({chosenAlgo, maze}) {
   }
 
   useEffect(() => {
-    if (board.length > 0 && maze){
-      for (let row = 0; row < BOARD_ROWS ; row++){
-        for (let col = 0; col < BOARD_COLUMNS ; col++){
-          let currCell = board[row][col];
+    console.log('eeee')
+    if  (board.length > 0){
+      if(maze){
+        for (let row = 0; row < BOARD_ROWS ; row++){
+          for (let col = 0; col < BOARD_COLUMNS ; col++){
 
-          setTimeout(() => {
-            
+            let currCell = board[row][col];
             if (!currCell.isStart && !currCell.isTarget){
               if (row === 0 || row === BOARD_ROWS - 1 || col === 0 || col === BOARD_COLUMNS - 1){
                 currCell.isWall = true;
@@ -88,18 +88,17 @@ function Grid({chosenAlgo, maze}) {
               currCell.isWall = false;
               setBoard(board => board)
             }
-          }, 1000);
+          }
         }
-      }
-    } else if (!maze) {
-      for (let row = 0; row < BOARD_ROWS ; row++){
-        for (let col = 0; col < BOARD_COLUMNS ; col++){
-          let currCell = board[row][col];
-          currCell.isWall = false;
+      } else { 
+        for (let row = 0; row < BOARD_ROWS ; row++){
+          for (let col = 0; col < BOARD_COLUMNS ; col++){
+            let currCell = board[row][col];
+            currCell.isWall = false;
+          }
         }
       }
     }
-
   }, [maze, board, board.length]
   )
   useEffect(() => {

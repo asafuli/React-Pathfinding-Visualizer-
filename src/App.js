@@ -6,18 +6,18 @@ import Grid from './components/Grid';
 
 function App() {
   const [ChosenAlgo, setChosenAlgo] = useState('None');
-  const [maze, setMaze] = useState('false');
+  const [maze, setMaze] = useState(false);
 
   const updateChosenAlgo = (chosenAlgo) => {
     setChosenAlgo(chosenAlgo);
   };
 
   const addMaze = () => {
-    setMaze((maze) => true);
+    setMaze(true);
   };
 
   const clearMaze = () => {
-    setMaze((maze) => false);
+    setMaze(false);
   };
 
   return (
