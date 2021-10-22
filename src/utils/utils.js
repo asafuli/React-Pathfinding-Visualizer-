@@ -4,7 +4,7 @@ export default function findPathAstarUtils(start, end, board) {
 
   //INIT G(n), H(n) for each cell
   let grid = initGrid(start, end, board);
-
+  let foundPath = false;
   let opened = [];
   let visited = [];
   let closed = [];
@@ -24,6 +24,7 @@ export default function findPathAstarUtils(start, end, board) {
 
     if (curr.gridRow === rowEnd && curr.gridColumn === colEnd) {
       console.log('FOUND PATH', curr);
+      foundPath = true;
       break;
     }
 
@@ -65,12 +66,14 @@ export default function findPathAstarUtils(start, end, board) {
         curr.Gn +
         Math.abs(curr.gridRow - el.gridRow) +
         Math.abs(curr.gridColumn - el.gridColumn);
+
+      //TODO - Allow going through walls with lower priority
       el.Fn = el.Gn + el.Hn;
 
       el.parent = curr;
 
       let indexOfNeighbour = opened.indexOf(el);
-      //Add all curr neighbours to opened list
+      //Add all curr neighbours to opened list and update Gn in case found a shorted path to it
       if (indexOfNeighbour !== -1) {
         opened[indexOfNeighbour].Gn =
           opened[indexOfNeighbour].Gn > el.Gn
@@ -93,9 +96,11 @@ export default function findPathAstarUtils(start, end, board) {
   //Build path
   let parent = grid[rowEnd][colEnd].parent;
   let path = [];
-  while (parent !== grid[rowStart][colStart]) {
-    path.push(parent);
-    parent = parent.parent;
+  if (foundPath) {
+    while (parent !== grid[rowStart][colStart]) {
+      path.push(parent);
+      parent = parent.parent;
+    }
   }
   return { grid, visited, path };
 }

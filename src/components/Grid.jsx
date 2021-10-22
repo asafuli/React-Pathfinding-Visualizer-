@@ -47,7 +47,7 @@ const findPathDijkstra= (start, end, board) => {
 }
 
 
-function Grid({chosenAlgo, maze}) {
+function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared}) {
 
   const [board, setBoard] = useState([]);
   const [Algorithm, setAlgorithm] = useState(chosenAlgo); 
@@ -59,6 +59,7 @@ function Grid({chosenAlgo, maze}) {
   const [path, setPath] = useState([]);
   const [pathCounter, setPathCounter] = useState(0);
   const [visitedAnimation, setVisitedAnimation] = useState(false);
+  const [noPossiblePath, setNoPossiblePath] = useState(false)
   
   const BOARD_ROWS = 25;
   const BOARD_COLUMNS = 45;
@@ -69,9 +70,10 @@ function Grid({chosenAlgo, maze}) {
   }
 
   useEffect(() => {
-    console.log('eeee')
+
     if  (board.length > 0){
       if(maze){
+
         for (let row = 0; row < BOARD_ROWS ; row++){
           for (let col = 0; col < BOARD_COLUMNS ; col++){
 
@@ -79,14 +81,11 @@ function Grid({chosenAlgo, maze}) {
             if (!currCell.isStart && !currCell.isTarget){
               if (row === 0 || row === BOARD_ROWS - 1 || col === 0 || col === BOARD_COLUMNS - 1){
                 currCell.isWall = true;
-                setBoard(board => board)
               } else {
                 currCell.isWall = Math.random() < 0.25;
-                setBoard(board => board)
               }
             } else {
               currCell.isWall = false;
-              setBoard(board => board)
             }
           }
         }
@@ -98,11 +97,14 @@ function Grid({chosenAlgo, maze}) {
           }
         }
       }
+      setBoard(board)
     }
   }, [maze, board, board.length]
   )
   useEffect(() => {
-  
+    
+    if (clearBoard) board.length = 0;
+    
     if (board.length === 0){
       let rows = BOARD_ROWS;
       let cols = BOARD_COLUMNS;
@@ -124,11 +126,13 @@ function Grid({chosenAlgo, maze}) {
       setTarget([rowTarget, colTarget]);
 
       console.log(newBoard);
-      setBoard(newBoard);
+      //TODO - Check why visited and Path are not cleared
+      setBoard(board => newBoard);
+      handleBoardCleared();
 
     }
     return () => {}
-  }, [board])
+  }, [board, clearBoard])
 
 
   useEffect(() => {
@@ -140,7 +144,6 @@ function Grid({chosenAlgo, maze}) {
     }
 
     setAlgorithm(chosenAlgo);
-    
     switch (chosenAlgo){
       case 'A*':
         let {grid : newBoard, visited: newVisited, path: newPath} = findPathAstar(start, target, board);
@@ -192,12 +195,15 @@ function Grid({chosenAlgo, maze}) {
   useEffect(() => {
 
     if (visitedAnimation){
+      if (path.length === 0){
+        setNoPossiblePath(true);
+      }
       //debugger;
       let paintSelectedInterval = setTimeout(() => {
 
-        if (path.length === 0 || pathCounter < 0) {
+        if ( pathCounter < 0) {
          clearTimeout(paintSelectedInterval);
-          return;
+         return;
         }
         path[pathCounter].selected = true;
         setPathCounter(pathCounter => pathCounter - 1);
@@ -205,15 +211,23 @@ function Grid({chosenAlgo, maze}) {
         return setPath(path => path)
        }, 1)
     }
-  }, [pathCounter, path.length, path, visitedAnimation]);
+  }, [pathCounter, path.length, path, visitedAnimation, noPossiblePath]);
 
  
 
   return (
-
-    <div className="grid-wrapper">
-    {board.map((row, rowIdx) => row.map((cell, cellIdx) => <GridCell key={`${rowIdx}-${cellIdx}`} id={`${rowIdx}-${cellIdx}`} cellData={cell} onClick={toggleWall}></GridCell>))}
-    </div>
+    <>
+      <div className="grid-wrapper">
+      {board.map((row, rowIdx) => row.map((cell, cellIdx) => <GridCell key={`${rowIdx}-${cellIdx}`} id={`${rowIdx}-${cellIdx}`} cellData={cell} onClick={toggleWall}></GridCell>))}
+      </div>
+      <div className='no-path-modal'>
+      {noPossiblePath 
+      ? 
+      <h1>No Possible Path</h1> 
+      : 
+      ''}
+      </div>
+   </>
   )
 
   

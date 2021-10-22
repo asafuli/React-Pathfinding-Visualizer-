@@ -5,8 +5,9 @@ import IconList from './components/IconList';
 import Grid from './components/Grid';
 
 function App() {
-  const [ChosenAlgo, setChosenAlgo] = useState('None');
+  const [chosenAlgo, setChosenAlgo] = useState('None');
   const [maze, setMaze] = useState(false);
+  const [clearBoard, setClearBoard] = useState(false);
 
   const updateChosenAlgo = (chosenAlgo) => {
     setChosenAlgo(chosenAlgo);
@@ -18,6 +19,11 @@ function App() {
 
   const clearMaze = () => {
     setMaze(false);
+    setClearBoard(true);
+  };
+
+  const boardCleared = () => {
+    setClearBoard(false);
   };
 
   return (
@@ -29,7 +35,12 @@ function App() {
           handleClrMaze={clearMaze}
         ></Navbar>
         <IconList></IconList>
-        <Grid chosenAlgo={ChosenAlgo} maze={maze}></Grid>
+        <Grid
+          chosenAlgo={chosenAlgo}
+          maze={maze}
+          clearBoard={clearBoard}
+          handleBoardCleared={boardCleared}
+        ></Grid>
       </div>
     </div>
   );
