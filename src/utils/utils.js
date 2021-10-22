@@ -29,12 +29,27 @@ export default function findPathAstarUtils(start, end, board) {
 
     ({ gridColumn, gridRow } = curr);
 
+    // Allowing only up down left right
     currNeighbours.push(
       gridRow + 1 <= board.length && grid[gridRow + 1][gridColumn],
       gridColumn > 0 && grid[gridRow][gridColumn - 1],
       gridRow > 0 && grid[gridRow - 1][gridColumn],
       gridColumn + 1 <= board[0].length && grid[gridRow][gridColumn + 1]
     );
+
+    // TODO -- Allowing also diagonal - Use Chebyshev distance.
+    // currNeighbours.push(
+    //   gridRow + 1 <= board.length &&
+    //     gridColumn + 1 <= board[0].length &&
+    //     grid[gridRow + 1][gridColumn + 1],
+    //   gridColumn > 0 &&
+    //     gridRow + 1 <= board.length &&
+    //     grid[gridRow + 1][gridColumn - 1],
+    //   gridRow > 0 &&
+    //     gridColumn + 1 <= board[0].length &&
+    //     grid[gridRow - 1][gridColumn + 1],
+    //   gridColumn > 0 && gridRow > 0 && grid[gridRow - 1][gridColumn - 1]
+    // );
 
     currNeighbours.map((el) => {
       if (
@@ -43,7 +58,6 @@ export default function findPathAstarUtils(start, end, board) {
         el.isWall ||
         closed.includes(el)
       ) {
-        debugger;
         return;
       }
       // Calculate Gn for all Neighbours
@@ -99,3 +113,10 @@ const initGrid = ([rowStart, colStart], [rowEnd, colEnd], board) => {
 
   return board;
 };
+
+//Heuristic Chebyshev distance.
+
+// function heuristic(node) =
+//     dx = abs(node.x - goal.x)
+//     dy = abs(node.y - goal.y)
+//     return D * (dx + dy) + (D2 - 2 * D) * min(dx, dy)

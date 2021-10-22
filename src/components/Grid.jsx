@@ -47,7 +47,7 @@ const findPathDijkstra= (start, end, board) => {
 }
 
 
-function Grid({chosenAlgo}) {
+function Grid({chosenAlgo, maze}) {
 
   const [board, setBoard] = useState([]);
   const [Algorithm, setAlgorithm] = useState(chosenAlgo); 
@@ -60,17 +60,54 @@ function Grid({chosenAlgo}) {
   const [pathCounter, setPathCounter] = useState(0);
   const [visitedAnimation, setVisitedAnimation] = useState(false);
   
+  const BOARD_ROWS = 25;
+  const BOARD_COLUMNS = 45;
 
-
-  const toggleWall = () => {
+  const toggleWall = ({gridRow, gridColumn, isWall}) => {
+    board[gridRow][gridColumn].isWall = !isWall
     setBoard(board => board)
   }
 
   useEffect(() => {
+    if (board.length > 0 && maze){
+      for (let row = 0; row < BOARD_ROWS ; row++){
+        for (let col = 0; col < BOARD_COLUMNS ; col++){
+          let currCell = board[row][col];
+
+          setTimeout(() => {
+            
+            if (!currCell.isStart && !currCell.isTarget){
+              if (row === 0 || row === BOARD_ROWS - 1 || col === 0 || col === BOARD_COLUMNS - 1){
+                currCell.isWall = true;
+                setBoard(board => board)
+              } else {
+                currCell.isWall = Math.random() < 0.25;
+                setBoard(board => board)
+              }
+            } else {
+              currCell.isWall = false;
+              setBoard(board => board)
+            }
+          }, 1000);
+        }
+      }
+    } else if (!maze) {
+      for (let row = 0; row < BOARD_ROWS ; row++){
+        for (let col = 0; col < BOARD_COLUMNS ; col++){
+          let currCell = board[row][col];
+          currCell.isWall = false;
+        }
+      }
+    }
+
+  }, [maze, board, board.length]
+  )
+  useEffect(() => {
   
     if (board.length === 0){
-      let rows = 25;
-      let cols = 45;
+      let rows = BOARD_ROWS;
+      let cols = BOARD_COLUMNS;
+
       let newBoard = [];
       for (let row = 0; row < rows; row++){
         newBoard.push([]);
@@ -132,7 +169,6 @@ function Grid({chosenAlgo}) {
   useEffect(
     () => {
       
-      // debugger
       let paintVisitedInterval = setTimeout(() => {
 
         if (visited.length === 0 || visitedCounter >= visited.length) {
@@ -161,7 +197,6 @@ function Grid({chosenAlgo}) {
       let paintSelectedInterval = setTimeout(() => {
 
         if (path.length === 0 || pathCounter < 0) {
-          //debugger;
          clearTimeout(paintSelectedInterval);
           return;
         }

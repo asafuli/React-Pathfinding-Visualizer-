@@ -101,7 +101,7 @@
   background-color: red !important;
 }
 
-.wall {
+.wall-cell {
   background-image: url('./static/images/wall.png');
   background-size: cover;
   background-color: black;
