@@ -52,6 +52,7 @@ export default function findPathAstarUtils(start, end, board) {
     //   gridColumn > 0 && gridRow > 0 && grid[gridRow - 1][gridColumn - 1]
     // );
 
+    // eslint-disable-next-line no-loop-func
     currNeighbours.map((el) => {
       if (
         el === false ||
@@ -59,7 +60,7 @@ export default function findPathAstarUtils(start, end, board) {
         el.isWall ||
         closed.includes(el)
       ) {
-        return;
+        return false;
       }
       // Calculate Gn for all Neighbours
       el.Gn =
@@ -84,6 +85,7 @@ export default function findPathAstarUtils(start, end, board) {
       } else {
         opened.push(el);
       }
+      return el;
     });
 
     opened.sort((n1, n2) => n1.Fn - n2.Fn);
