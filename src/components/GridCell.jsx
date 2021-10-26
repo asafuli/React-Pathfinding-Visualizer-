@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 function GridCell({cellData, id, onClick}) {
 
@@ -16,6 +16,13 @@ function GridCell({cellData, id, onClick}) {
     visited: Data.visited ? 'visited' : '',
     isWall: Data.isWall ? 'wall-cell': ''
   };
+
+  useEffect(() => {
+
+    setData(Data => cellData)
+    return () => { 
+    };
+  }, [cellData])
 
 
   return (

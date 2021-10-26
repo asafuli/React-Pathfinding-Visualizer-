@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze}) {
+function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze, createNewBoard}) {
   
   return (
     <ul className="navbar-list">
@@ -13,7 +13,7 @@ function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze}) {
       <li className="navbar-item">
         Mazes & Patthers
         <button className="add-maze-btn" onClick={() => handleAddMaze()}>Add Maze</button>
-        <button className="clr-maze-btn" onClick={() => handleClrMaze()}>Clear Maze</button>
+        <button className="clr-maze-btn" onClick={() => handleClrMaze()}>New Board</button>
       </li>
       <li className="navbar-item">
         Add Halfway Point
