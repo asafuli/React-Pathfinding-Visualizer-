@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze, createNewBoard}) {
+function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze,handleSetSpeed, createNewBoard}) {
   
   return (
     <ul className="navbar-list">
@@ -18,6 +18,12 @@ function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze, createNewBo
         <button className="visualizer-btn" onClick={() => handleVisualizeClick('A*')}>
         Visualize
         </button>
+        
+      </li>
+      <li className="navbar-item" id="animation-speed">
+        <span>Set Animation Speed</span>
+        <button className="set-speed-btn" onClick={() => handleSetSpeed(1)}>+</button>
+        <button className="set-speed-btn" onClick={() => handleSetSpeed(-1)}>-</button>
         
       </li>
     </ul>

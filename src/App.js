@@ -5,6 +5,9 @@ import IconList from './components/IconList';
 import Grid from './components/Grid';
 import Modal from './components/Modal';
 
+const INCREASE_SPEED = 1;
+const DECREASE_SPEED = -1;
+
 function App() {
   const [chosenAlgo, setChosenAlgo] = useState('None');
   const [maze, setMaze] = useState(false);
@@ -13,6 +16,7 @@ function App() {
   const [closeModal, setCloseModal] = useState(false);
   const [triggerCreateBoard, setTriggerCreateBoard] = useState(false);
   const [modalClicked, setModalClicked] = useState(false);
+  const [animationSpeed, setAnimationSpeed] = useState(100);
 
   const updateChosenAlgo = (chosenAlgo) => {
     setChosenAlgo(chosenAlgo);
@@ -50,6 +54,16 @@ function App() {
     }
   };
 
+  const handleSetSpeed = (animationSpeedDirection) => {
+    if (animationSpeedDirection === INCREASE_SPEED) {
+      setAnimationSpeed((animationSpeed) => Math.max(animationSpeed - 200, 0));
+    } else if (animationSpeedDirection === DECREASE_SPEED) {
+      setAnimationSpeed((animationSpeed) =>
+        Math.min(animationSpeed + 200, 2000)
+      );
+    }
+  };
+
   return (
     <div className='App' onClick={() => handleModalClicked()}>
       <div className='app-header'>
@@ -57,6 +71,7 @@ function App() {
           handleVisualizeClick={updateChosenAlgo}
           handleAddMaze={addMaze}
           handleClrMaze={clearMaze}
+          handleSetSpeed={handleSetSpeed}
           createNewBoard={createNewBoard}
         ></Navbar>
         <IconList></IconList>
@@ -70,6 +85,7 @@ function App() {
           noPossiblePath={noPossiblePath}
           triggerCreateBoard={triggerCreateBoard}
           handleMazeCreated={handleMazeCreated}
+          animationSpeed={animationSpeed}
           modalClicked={modalClicked}
         ></Grid>
       </div>

@@ -53,7 +53,7 @@ const findPathDijkstra= (start, end, board) => {
 }
 
 
-function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked}) {
+function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked, animationSpeed}) {
 
   const [board, setBoard] = useState([]);
   const [Algorithm, setAlgorithm] = useState(chosenAlgo); 
@@ -65,7 +65,6 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
   const [path, setPath] = useState([]);
   const [pathCounter, setPathCounter] = useState(0);
   const [visitedAnimation, setVisitedAnimation] = useState(false);
-  
 
   const toggleWall = ({gridRow, gridColumn, isWall}) => {
     board[gridRow][gridColumn].isWall = !isWall
@@ -207,11 +206,11 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
         setVisitedCounter(visitedCounter => visitedCounter + 1);
         return setVisited(visited => visited)
        } 
-       , 1
+       ,animationSpeed 
       );
 
     },
-    [done, visited, visitedCounter,visitedAnimation]
+    [done, visited, visitedCounter,visitedAnimation, animationSpeed]
   );
 
   // Handle animation for path
@@ -235,9 +234,9 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
         setPathCounter(pathCounter => pathCounter - 1);
         // console.log(path[pathCounter])
         return setPath(path => path)
-       }, 1)
+       }, animationSpeed)
     }
-  }, [pathCounter, path.length, path, visitedAnimation, noPossiblePath, updateNoPossiblePath, updateChosenAlgo, modalClicked]);
+  }, [pathCounter, path.length, path, visitedAnimation, noPossiblePath, updateNoPossiblePath, updateChosenAlgo, modalClicked, animationSpeed]);
 
  
 
