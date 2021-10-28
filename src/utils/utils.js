@@ -31,12 +31,16 @@ export default function findPathAstarUtils(start, end, board) {
     ({ gridColumn, gridRow } = curr);
 
     // Allowing only up down left right
-    currNeighbours.push(
-      gridRow + 1 <= board.length && grid[gridRow + 1][gridColumn],
-      gridColumn > 0 && grid[gridRow][gridColumn - 1],
-      gridRow > 0 && grid[gridRow - 1][gridColumn],
-      gridColumn + 1 <= board[0].length && grid[gridRow][gridColumn + 1]
-    );
+    try {
+      currNeighbours.push(
+        gridRow + 1 < board.length && grid[gridRow + 1][gridColumn],
+        gridColumn > 0 && grid[gridRow][gridColumn - 1],
+        gridRow > 0 && grid[gridRow - 1][gridColumn],
+        gridColumn + 1 < board[0].length && grid[gridRow][gridColumn + 1]
+      );
+    } catch {
+      debugger;
+    }
 
     // TODO -- Allowing also diagonal - Use Chebyshev distance.
     // currNeighbours.push(

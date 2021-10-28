@@ -7,6 +7,7 @@ import Modal from './components/Modal';
 
 const INCREASE_SPEED = 1;
 const DECREASE_SPEED = -1;
+const INITIAL_ANIMATION_SPEED = 100;
 
 function App() {
   const [chosenAlgo, setChosenAlgo] = useState('None');
@@ -16,7 +17,7 @@ function App() {
   const [closeModal, setCloseModal] = useState(false);
   const [triggerCreateBoard, setTriggerCreateBoard] = useState(false);
   const [modalClicked, setModalClicked] = useState(false);
-  const [animationSpeed, setAnimationSpeed] = useState(100);
+  const [animationSpeed, setAnimationSpeed] = useState(INITIAL_ANIMATION_SPEED);
 
   const updateChosenAlgo = (chosenAlgo) => {
     setChosenAlgo(chosenAlgo);
@@ -56,10 +57,10 @@ function App() {
 
   const handleSetSpeed = (animationSpeedDirection) => {
     if (animationSpeedDirection === INCREASE_SPEED) {
-      setAnimationSpeed((animationSpeed) => Math.max(animationSpeed - 200, 0));
+      setAnimationSpeed((animationSpeed) => Math.max(animationSpeed - 75, 0));
     } else if (animationSpeedDirection === DECREASE_SPEED) {
       setAnimationSpeed((animationSpeed) =>
-        Math.min(animationSpeed + 200, 2000)
+        Math.min(animationSpeed + 75, 1500)
       );
     }
   };

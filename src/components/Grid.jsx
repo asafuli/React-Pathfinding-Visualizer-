@@ -33,8 +33,8 @@ function initializeStartAndTarget(cols, rows) {
 
   // let colStart = 1;
   // let rowStart = 1;
-  // let colTarget = BOARD_COLUMNS - 4;
-  // let rowTarget = BOARD_ROWS - 4;
+  // let colTarget = BOARD_COLUMNS - 1 ;
+  // let rowTarget = BOARD_ROWS - 1;
 
   if (colTarget === colStart && rowTarget === rowStart) {
     colTarget = (colTarget + 10) % cols;
