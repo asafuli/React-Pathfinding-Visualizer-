@@ -77,19 +77,21 @@ function App() {
           createNewBoard={createNewBoard}
         ></Navbar>
         {/* <IconList></IconList> */}
-        <Grid
-          chosenAlgo={chosenAlgo}
-          updateChosenAlgo={updateChosenAlgo}
-          maze={maze}
-          clearBoard={clearBoard}
-          handleBoardCleared={boardCleared}
-          updateNoPossiblePath={updateNoPossiblePath}
-          noPossiblePath={noPossiblePath}
-          triggerCreateBoard={triggerCreateBoard}
-          handleMazeCreated={handleMazeCreated}
-          animationSpeed={animationSpeed}
-          modalClicked={modalClicked}
-        ></Grid>
+        <div className='grid-border'>
+          <Grid
+            chosenAlgo={chosenAlgo}
+            updateChosenAlgo={updateChosenAlgo}
+            maze={maze}
+            clearBoard={clearBoard}
+            handleBoardCleared={boardCleared}
+            updateNoPossiblePath={updateNoPossiblePath}
+            noPossiblePath={noPossiblePath}
+            triggerCreateBoard={triggerCreateBoard}
+            handleMazeCreated={handleMazeCreated}
+            animationSpeed={animationSpeed}
+            modalClicked={modalClicked}
+          ></Grid>
+        </div>
       </div>
       {noPossiblePath ? (
         <Modal

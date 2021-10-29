@@ -31,7 +31,7 @@ function initializeStartAndTarget(cols, rows) {
   let colTarget = Math.floor(Math.random() * cols);
   let rowTarget = Math.floor(Math.random() * rows);
 
-  // let colStart = 1;
+  //  let colStart = 1;
   // let rowStart = 1;
   // let colTarget = BOARD_COLUMNS - 1 ;
   // let rowTarget = BOARD_ROWS - 1;
