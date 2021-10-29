@@ -7,6 +7,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #102a44;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  color: antiquewhite;
 }
 
 .icon-list-wrapper {
@@ -22,14 +26,14 @@
   margin: 0 1rem 0.5rem 1rem;
 }
 
-.navbar-list {
+.vbar-list {
   display: flex;
   flex-direction: row;
   list-style: none;
   padding: 0.5rem;
 }
 
-.navbar-item {
+.vbar-item {
   width: fit-content;
   padding: 0.1rem;
   margin: 0 1rem 0.5rem 1rem;
@@ -53,7 +57,7 @@
 .grid-cell-item {
   width: var(--grid-cell-width);
   height: var(--grid-cell-width);
-  border: 1px solid cyan;
+  border: 1px solid #8badc1;
 }
 
 .grid-cell-item:hover {
@@ -68,7 +72,7 @@
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-iteration-count: 1;
-  animation-direction: alternate;
+  animation-direction: alterte;
 }
 
 @keyframes visitedAnimation {
@@ -115,7 +119,7 @@
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-iteration-count: 1;
-  animation-direction: alternate;
+  animation-direction: alterte;
   background-color: black;
 }
 
@@ -153,14 +157,14 @@
   left: 40vw;
   top: 40vh;
   font-size: xx-large;
-  animation-name: noPossiblePathAnimation;
+  animation-me: noPossiblePathAnimation;
   animation-duration: 5s;
   animation-timing-function: linear;
   animation-delay: 0;
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-iteration-count: 1;
-  animation-direction: alternate;
+  animation-direction: alterte;
   background-color: black;
 }
 

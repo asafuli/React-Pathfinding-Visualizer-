@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import IconList from './components/IconList';
 import Grid from './components/Grid';
 import Modal from './components/Modal';
+import Title from './components/Title';
 
 const INCREASE_SPEED = 1;
 const DECREASE_SPEED = -1;
@@ -68,6 +69,7 @@ function App() {
   return (
     <div className='App' onClick={() => handleModalClicked()}>
       <div className='app-header'>
+        <Title></Title>
         <Navbar
           handleVisualizeClick={updateChosenAlgo}
           handleAddMaze={addMaze}

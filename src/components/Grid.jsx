@@ -81,12 +81,12 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
   }, [triggerCreateBoard])
 
 
-  // Toggle Maze 
+  // Create Maze 
   useEffect(() => {
 
     if  (board.length > 0){
       let newBoard = [...board];
-      if(maze){
+      if(maze && visited.length === 0){
         for (let row = 0; row < BOARD_ROWS ; row++){
           for (let col = 0; col < BOARD_COLUMNS ; col++){
 
@@ -114,7 +114,7 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
       //   }
       // }
     }
-  }, [maze, board, board.length, handleMazeCreated]
+  }, [maze, board, board.length, handleMazeCreated, visited.length]
   )
 
   // Clear the board

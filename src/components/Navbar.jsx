@@ -5,9 +5,6 @@ function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze,handleSetSpe
   return (
     <ul className="navbar-list">
       <li className="navbar-item">
-        <h2>Pathfinding Visualizer</h2>
-      </li>
-      <li className="navbar-item">
         Algorithms (A*) 
       </li>
       <li className="navbar-item">
