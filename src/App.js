@@ -77,7 +77,7 @@ function App() {
           handleSetSpeed={handleSetSpeed}
           createNewBoard={createNewBoard}
         ></Navbar>
-        <IconList></IconList>
+        {/* <IconList></IconList> */}
         <Grid
           chosenAlgo={chosenAlgo}
           updateChosenAlgo={updateChosenAlgo}

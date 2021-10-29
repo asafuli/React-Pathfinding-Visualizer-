@@ -26,15 +26,26 @@
   margin: 0 1rem 0.5rem 1rem;
 }
 
-.vbar-list {
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: pink;
+  margin-bottom: 0.5rem;
+}
+
+.navbar-list {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   list-style: none;
   padding: 0.5rem;
 }
 
-.vbar-item {
+.navbar-item {
   width: fit-content;
+
   padding: 0.1rem;
   margin: 0 1rem 0.5rem 1rem;
 }
@@ -57,7 +68,7 @@
 .grid-cell-item {
   width: var(--grid-cell-width);
   height: var(--grid-cell-width);
-  border: 1px solid #8badc1;
+  border: 1px solid #fff9ae;
 }
 
 .grid-cell-item:hover {
@@ -72,28 +83,27 @@
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-iteration-count: 1;
-  animation-direction: alterte;
+  animation-direction: alternate;
 }
 
 @keyframes visitedAnimation {
   0% {
     transform: scale(0.3);
-    background-color: rgba(4, 41, 30, 0.75);
+    background-color: #c9df8a;
     border-radius: 70%;
   }
 
   50% {
-    background-color: rgba(52, 97, 0, 0.75);
+    background-color: #77ab59;
   }
-
   75% {
     transform: scale(1.2);
-    background-color: rgba(195, 216, 5, 0.75);
+    background-color: #36802d;
   }
 
   100% {
     transform: scale(1);
-    background-color: rgba(67, 255, 83, 0.75);
+    background-color: #234d20;
   }
 }
 
@@ -119,29 +129,29 @@
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-iteration-count: 1;
-  animation-direction: alterte;
-  background-color: black;
+  animation-direction: alternate;
 }
 
 @keyframes selectedAnimation {
   0% {
     transform: scale(0.3);
-    background-color: rgba(156, 162, 160, 0.75);
+    background-color: #e1f7d5;
     border-radius: 70%;
   }
 
   50% {
-    background-color: rgba(94, 100, 86, 0.75);
+    background-color: #ffbdbd;
   }
 
   75% {
     transform: scale(1.2);
-    background-color: rgba(45, 46, 42, 0.75);
+    /* background-color: rgba(45, 46, 42, 0.75); */
+    background-color: #c9c9ff;
   }
 
   100% {
     transform: scale(1);
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: #f1cbff;
   }
 }
 
@@ -157,14 +167,14 @@
   left: 40vw;
   top: 40vh;
   font-size: xx-large;
-  animation-me: noPossiblePathAnimation;
+  animation-name: noPossiblePathAnimation;
   animation-duration: 5s;
   animation-timing-function: linear;
   animation-delay: 0;
   animation-fill-mode: forwards;
   animation-play-state: running;
   animation-iteration-count: 1;
-  animation-direction: alterte;
+  animation-direction: alternate;
   background-color: black;
 }
 
@@ -192,6 +202,10 @@
     transform: scale(1);
     background-color: wheat;
   }
+}
+
+button {
+  box-shadow: 0.1rem 0.1rem black;
 }
 
 .set-speed-btn {

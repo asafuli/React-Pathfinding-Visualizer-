@@ -18,7 +18,7 @@ function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze,handleSetSpe
         
       </li>
       <li className="navbar-item" id="animation-speed">
-        <span>Set Animation Speed</span>
+        <span>Set Animation Speed </span>
         <button className="set-speed-btn" onClick={() => handleSetSpeed(1)}>+</button>
         <button className="set-speed-btn" onClick={() => handleSetSpeed(-1)}>-</button>
         
