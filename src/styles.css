@@ -108,11 +108,15 @@
 }
 
 .starting-cell {
-  background-color: blue !important;
+  background-image: url('./static/images/start.jpg') !important;
+  background-size: cover;
+  background-color: black;
 }
 
 .target-cell {
-  background-color: red !important;
+  background-image: url('./static/images/end.jpg') !important;
+  background-size: cover;
+  background-color: black;
 }
 
 .wall-cell {
