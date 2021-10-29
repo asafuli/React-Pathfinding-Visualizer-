@@ -1,7 +1,6 @@
 import './styles.css';
 import { useState } from 'react';
 import Navbar from './components/Navbar';
-import IconList from './components/IconList';
 import Grid from './components/Grid';
 import Modal from './components/Modal';
 import Title from './components/Title';
