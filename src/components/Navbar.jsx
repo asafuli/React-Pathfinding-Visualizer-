@@ -13,7 +13,16 @@ function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze,handleSetSpe
       </li>
       <li className="navbar-item">
         <button className="visualizer-btn" onClick={() => handleVisualizeClick('A*')}>
-        Visualize
+        Visualize A*
+        </button>
+        <button className="visualizer-btn" onClick={() => handleVisualizeClick('dijkstra')}>
+        Visualize Dijkstra
+        </button>
+        <button className="visualizer-btn" disabled onClick={() => handleVisualizeClick('dijkstra')}>
+        Visualize BFS
+        </button>
+        <button className="visualizer-btn" disabled onClick={() => handleVisualizeClick('dijkstra')}>
+        Visualize DFS
         </button>
         
       </li>

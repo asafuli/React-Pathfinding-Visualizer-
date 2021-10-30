@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import GridCell from './GridCell';
-import findPathAstarUtils  from '../utils/utils';
+import {findPathAstarUtils, findPathBFSUtils, findPathDFSUtils ,findPathDijkstraUtils}  from '../utils/utils';
 
 // Extracted cell outside of the function component in order to avoid reinstantiation on every Render 
 // Warning was useEffect : https://stackoverflow.com/questions/65321359/how-to-fix-warning-function-makes-the-dependencies-of-useeffect-hook-change
@@ -49,7 +49,15 @@ const findPathAstar = (start, end, board) => {
 }
 
 const findPathDijkstra= (start, end, board) => {
-  return null
+  return findPathDijkstraUtils(start, end, board);
+}
+
+const findPathBFS = (start, end, board) => {
+  return findPathBFSUtils(start, end, board);
+}
+
+const findPathDFS = (start, end, board) => {
+  return findPathDFSUtils(start, end, board);
 }
 
 
@@ -158,6 +166,17 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
 
   // Handle choosing and Algorithm and call the relevant pathfinding method 
   useEffect(() => {
+    
+    // Extraction of repeated code
+    const updateStateWithPathInfo = ({grid: newBoard, visited: newVisited, path : newPath}) => {
+      console.log(newPath);
+      setBoard(board => newBoard);
+      setVisited(visited => newVisited);
+      setPath(path => newPath)
+      setPathCounter(pathCounter => newPath.length - 1)
+      setDone(true);
+      updateChosenAlgo('None')
+    }
 
     if (chosenAlgo === Algorithm) {
       console.log('Returning from UseEffect - Algorithm was not changed :', Algorithm);
@@ -165,19 +184,26 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
     }
 
     setAlgorithm(chosenAlgo);
+    let pathInfo = {};
     switch (chosenAlgo){
       case 'A*':
-        let {grid : newBoard, visited: newVisited, path: newPath} = findPathAstar(start, target, board);
-        setBoard(board => newBoard);
-        setVisited(visited => newVisited);
-        setPath(path => newPath)
-        setPathCounter(pathCounter => newPath.length - 1)
-        setDone(true);
-        updateChosenAlgo('None')
+        pathInfo = findPathAstar(start, target, board);
+        console.log(pathInfo)
+        updateStateWithPathInfo(pathInfo);
+        break;
+      case 'dijkstra':
+        pathInfo = findPathDijkstra(start, target, board); 
+        updateStateWithPathInfo(pathInfo);
         break;
 
-      case 'dijkstra':
-        findPathDijkstra(start, target);
+      case 'BFS':
+        pathInfo = findPathBFS(start, target, board);
+        updateStateWithPathInfo(pathInfo);
+        break;
+
+      case 'DFS':
+        pathInfo =findPathDFS(start, target, board);
+        updateStateWithPathInfo(pathInfo);
         break;
 
       default:
