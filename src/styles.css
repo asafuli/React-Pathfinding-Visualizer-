@@ -1,5 +1,5 @@
 :root {
-  --grid-width: 45;
+  --grid-width: calc(45);
   --grid-cell-width: calc(100vw / calc(var(--grid-width) + 5));
 }
 
