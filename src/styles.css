@@ -171,11 +171,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: tomato 0.2rem solid;
+  border: plum 0.2rem solid;
   position: absolute;
   left: 40vw;
   top: 40vh;
-  font-size: xx-large;
   animation-name: noPossiblePathAnimation;
   animation-duration: 5s;
   animation-timing-function: linear;
@@ -184,11 +183,16 @@
   animation-play-state: running;
   animation-iteration-count: 1;
   animation-direction: alternate;
-  background-color: black;
 }
 
 .no-path-modal .close-modal {
   display: none important!;
+}
+
+.no-path-modal-text {
+  font-size: 2rem;
+  background-color: transparent;
+  text-shadow: 1px 1px #c9c9ff;
 }
 
 @keyframes noPossiblePathAnimation {
@@ -209,7 +213,8 @@
 
   100% {
     transform: scale(1);
-    background-color: wheat;
+    background-color: plum;
+    border-radius: 5%;
   }
 }
 
