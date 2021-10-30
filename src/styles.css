@@ -1,6 +1,6 @@
 :root {
-  --grid-width: calc(45);
-  --grid-cell-width: calc(100vw / calc(var(--grid-width) + 5));
+  --grid-width: 45;
+  --grid-cell-width: calc(100vw / var(--grid-width) + 5);
 }
 
 * {
@@ -58,10 +58,6 @@
     minmax(var(--grid-cell-width), var(--grid-cell-width))
   );
   margin: 0 0.5rem 0 0.5rem;
-}
-
-.grid-border {
-  width: var(--grid-width) - 3rem;
 }
 
 .grid-cell-wrapper {
