@@ -1,6 +1,6 @@
 :root {
   --grid-width: 45;
-  --grid-cell-width: calc(100vw / (var(--grid-width) + 5));
+  --grid-cell-width: calc(100vw / calc(var(--grid-width) + 5));
 }
 
 * {
