@@ -1,6 +1,6 @@
 :root {
-  --grid-width: 45;
-  --grid-cell-width: calc(100vw / (var(--grid-width) + 5));
+  --grid-width: 60;
+  --grid-cell-width: calc(100vw / (var(--grid-width) + 0.5));
 }
 
 * {
@@ -32,7 +32,7 @@
   justify-content: center;
   font-size: 2rem;
   color: pink;
-  margin: 1rem 0 0.5rem 0;
+  margin: 0.4rem 0 0.5rem 0;
   text-shadow: 1px 1px black;
 }
 
@@ -40,15 +40,36 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: var(--grid-width);
   list-style: none;
   padding: 0.5rem;
+  background-color: #e1f7d5;
+  opacity: 1;
+  margin: 0 0.2rem 0 0.5rem;
+  border-radius: 5px;
 }
 
 .navbar-item {
   width: fit-content;
   padding: 0.1rem;
-  margin: 0 1rem 0.5rem 1rem;
+  margin: 0 1rem 0.1rem 1rem;
   text-shadow: 1px 1px black;
+}
+
+.algorithms-list {
+  display: none;
+}
+
+.algorithms-list.opened {
+  display: block;
+}
+
+.caret {
+  background-image: url(./static/images/caret.png);
+  background-size: cover;
+  background-color: red;
+  border: 1px solid red;
+  width: 2rem;
 }
 
 .grid-wrapper {
@@ -57,7 +78,7 @@
     var(--grid-width),
     minmax(var(--grid-cell-width), var(--grid-cell-width))
   );
-  margin: 0 0.5rem 0 0.5rem;
+  margin: 0.2rem 0.5rem 0 0.5rem;
 }
 
 .grid-cell-wrapper {
