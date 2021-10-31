@@ -43,7 +43,7 @@
   width: var(--grid-width);
   list-style: none;
   padding: 0.5rem;
-  background-color: #e1f7d5;
+  background-image: linear-gradient(to bottom right, #e1f7d5, blue);
   opacity: 1;
   margin: 0 0.2rem 0 0.5rem;
   border-radius: 5px;
@@ -54,22 +54,34 @@
   padding: 0.1rem;
   margin: 0 1rem 0.1rem 1rem;
   text-shadow: 1px 1px black;
+  background-color: transparent;
+}
+
+i,
+div,
+li,
+span {
+  background-color: transparent;
+}
+
+.algorithms-list-header {
+  background-color: transparent;
 }
 
 .algorithms-list {
   display: none;
+  list-style: none;
 }
 
 .algorithms-list.opened {
   display: block;
-}
-
-.caret {
-  background-image: url(./static/images/caret.png);
-  background-size: cover;
-  background-color: red;
-  border: 1px solid red;
-  width: 2rem;
+  position: absolute;
+  background-image: linear-gradient(to bottom right, #e1f7d5, blue);
+  border: 1px solid paleturquoise;
+  border-radius: 5px;
+  margin: 0.3rem 0 0 0.2rem;
+  /* box-shadow: 2px 1px black; */
+  opacity: 1;
 }
 
 .grid-wrapper {
@@ -236,7 +248,22 @@
 }
 
 button {
-  box-shadow: 0.1rem 0.1rem black;
+  text-shadow: 1px 1px black;
+  background-color: transparent;
+  border: none;
+}
+
+button:hover,
+.algorithms-list-header:hover {
+  background-color: #102a44;
+}
+
+.visualize-btn {
+  color: lightgreen;
+}
+
+.visualize-btn:hover {
+  color: orange;
 }
 
 .set-speed-btn {
