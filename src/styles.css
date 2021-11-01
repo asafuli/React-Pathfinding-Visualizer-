@@ -260,6 +260,8 @@ button:hover,
 
 .visualize-btn {
   color: lightgreen;
+  background-color: lightsalmon;
+  padding: 0rem 0.3rem 0.2rem 0.3rem;
 }
 
 .visualize-btn:hover {
