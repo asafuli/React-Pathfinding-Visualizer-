@@ -79,7 +79,10 @@ span {
   background-image: linear-gradient(to bottom right, #e1f7d5, blue);
   border: 1px solid paleturquoise;
   border-radius: 5px;
-  margin: 0.3rem 0 0 0.2rem;
+  width: fit-content;
+  padding: 0 0.3rem 0 0.3rem;
+  margin-left: 1rem;
+  margin-top: 0.3rem;
   /* box-shadow: 2px 1px black; */
   opacity: 1;
 }
@@ -256,12 +259,15 @@ button {
 button:hover,
 .algorithms-list-header:hover {
   background-color: #102a44;
+  border-radius: 5px;
+  padding: 0.1rem 0.1rem 0.1rem 0.1rem;
 }
 
 .visualize-btn {
   color: lightgreen;
-  background-color: lightsalmon;
+  /* background-color: lightsalmon; */
   padding: 0rem 0.3rem 0.2rem 0.3rem;
+  border-radius: 5px;
 }
 
 .visualize-btn:hover {
