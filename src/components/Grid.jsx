@@ -61,7 +61,7 @@ const findPathDFS = (start, end, board) => {
 }
 
 
-function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked, animationSpeed}) {
+function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked, animationSpeed}) {
 
   const [board, setBoard] = useState([]);
   const [Algorithm, setAlgorithm] = useState(chosenAlgo); 
@@ -158,15 +158,16 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
       updateChosenAlgo('None')
       updateNoPossiblePath(false);
       handleBoardCleared();
+      updateShouldVisualize(false)
 
     }
     return () => {}
-  }, [board, clearBoard, handleBoardCleared, visited, updateChosenAlgo, updateNoPossiblePath])
+  }, [board, clearBoard, handleBoardCleared, visited, updateChosenAlgo, updateNoPossiblePath, updateShouldVisualize])
 
 
   // Handle choosing and Algorithm and call the relevant pathfinding method 
   useEffect(() => {
-    
+
     // Extraction of repeated code
     const updateStateWithPathInfo = ({grid: newBoard, visited: newVisited, path : newPath}) => {
       console.log(newPath);
@@ -175,44 +176,48 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
       setPath(path => newPath)
       setPathCounter(pathCounter => newPath.length - 1)
       setDone(true);
-      updateChosenAlgo('None')
+      updateChosenAlgo('None');
+      updateShouldVisualize(false)
     }
 
-    if (chosenAlgo === Algorithm) {
+    if (chosenAlgo === Algorithm & !shouldVisualize ) {
       console.log('Returning from UseEffect - Algorithm was not changed :', Algorithm);
       return;
     }
 
     setAlgorithm(chosenAlgo);
     let pathInfo = {};
-    switch (chosenAlgo){
-      case 'A*':
-        pathInfo = findPathAstar(start, target, board);
-        console.log(pathInfo)
-        updateStateWithPathInfo(pathInfo);
-        break;
-      case 'dijkstra':
-        pathInfo = findPathDijkstra(start, target, board); 
-        updateStateWithPathInfo(pathInfo);
-        break;
+    if (shouldVisualize){
 
-      case 'BFS':
-        pathInfo = findPathBFS(start, target, board);
-        updateStateWithPathInfo(pathInfo);
-        break;
-
-      case 'DFS':
-        pathInfo =findPathDFS(start, target, board);
-        updateStateWithPathInfo(pathInfo);
-        break;
-
-      default:
-        console.log(`Algorithm ${Algorithm} cant be visualized... `)
-    
+      switch (chosenAlgo){
+        case 'A*':
+          pathInfo = findPathAstar(start, target, board);
+          console.log(pathInfo)
+          updateStateWithPathInfo(pathInfo);
+          break;
+        case 'dijkstra':
+          pathInfo = findPathDijkstra(start, target, board); 
+          updateStateWithPathInfo(pathInfo);
+          break;
+  
+        case 'BFS':
+          pathInfo = findPathBFS(start, target, board);
+          updateStateWithPathInfo(pathInfo);
+          break;
+  
+        case 'DFS':
+          pathInfo =findPathDFS(start, target, board);
+          updateStateWithPathInfo(pathInfo);
+          break;
+  
+        default:
+          console.log(`Algorithm ${Algorithm} cant be visualized... `)
+      
+      }
     }
   
     return () => {};
-  }, [Algorithm, start, target, board,chosenAlgo, updateChosenAlgo])
+  }, [Algorithm, start, target, board,chosenAlgo, updateChosenAlgo, updateShouldVisualize, shouldVisualize])
 
 
   // // Handle Animation for the Visited cells
@@ -249,6 +254,7 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
         debugger
         updateNoPossiblePath(true);
         updateChosenAlgo('None');
+        updateShouldVisualize(false)
       }
 
       let paintSelectedInterval = setTimeout(() => {
@@ -262,7 +268,7 @@ function Grid({chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossib
         return setPath(path => path)
        }, animationSpeed)
     }
-  }, [pathCounter, path.length, path, visitedAnimation, noPossiblePath, updateNoPossiblePath, updateChosenAlgo, modalClicked, animationSpeed]);
+  }, [pathCounter, path.length, path, visitedAnimation, noPossiblePath, updateNoPossiblePath, updateChosenAlgo, modalClicked, animationSpeed, updateShouldVisualize]);
 
  
 

@@ -10,6 +10,7 @@ const DECREASE_SPEED = -1;
 const INITIAL_ANIMATION_SPEED = 100;
 
 function App() {
+  const [shouldVisualize, setShouldVisualize] = useState(false);
   const [chosenAlgo, setChosenAlgo] = useState('None');
   const [maze, setMaze] = useState(false);
   const [clearBoard, setClearBoard] = useState(false);
@@ -18,6 +19,10 @@ function App() {
   const [triggerCreateBoard, setTriggerCreateBoard] = useState(false);
   const [modalClicked, setModalClicked] = useState(false);
   const [animationSpeed, setAnimationSpeed] = useState(INITIAL_ANIMATION_SPEED);
+
+  const updateShouldVisualize = (currShouldVisualize) => {
+    setShouldVisualize((shouldVisualize) => currShouldVisualize);
+  };
 
   const updateChosenAlgo = (chosenAlgo) => {
     setChosenAlgo(chosenAlgo);
@@ -70,15 +75,19 @@ function App() {
       <div className='app-header'>
         <Title></Title>
         <Navbar
-          handleVisualizeClick={updateChosenAlgo}
+          updateChosenAlgo={updateChosenAlgo}
+          updateShouldVisualize={updateShouldVisualize}
           handleAddMaze={addMaze}
           handleClrMaze={clearMaze}
           handleSetSpeed={handleSetSpeed}
           createNewBoard={createNewBoard}
+          chosenAlgo={chosenAlgo === 'None' ? '' : chosenAlgo}
         ></Navbar>
         {/* <IconList></IconList> */}
         <div className='grid-border'>
           <Grid
+            shouldVisualize={shouldVisualize}
+            updateShouldVisualize={updateShouldVisualize}
             chosenAlgo={chosenAlgo}
             updateChosenAlgo={updateChosenAlgo}
             maze={maze}

@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze,handleSetSpeed, createNewBoard}) {
+function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMaze, handleClrMaze,handleSetSpeed, createNewBoard, }) {
 
   const [AlgoDropdownOpened, setAlgoDropdownOpened] = useState(false);
 
@@ -14,23 +14,23 @@ function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze,handleSetSpe
         <div className='alogrithms-list-header'>Algorithms <i className="fas fa-caret-down" onClick={() => toggleAlgoDropdown()}></i></div>
         <ul className={`algorithms-list ${AlgoDropdownOpened ? 'opened' : ''}`}>
           <li className="algorithm-list-item"> 
-          <button className="visualizer-btn" onClick={() => {toggleAlgoDropdown(); handleVisualizeClick('A*')}}>
+          <button className="visualizer-btn" onClick={() => { updateChosenAlgo('A*')}}>
          A*
         </button>
           </li>
           <li className="algorithm-list-item"> 
-          <button className="visualizer-btn" onClick={() => {toggleAlgoDropdown();
-            handleVisualizeClick('dijkstra')}}>
+          <button className="visualizer-btn" onClick={() => {
+            updateChosenAlgo('dijkstra')}}>
          Dijkstra
         </button></li>
           <li className="algorithm-list-item"> 
-          <button className="visualizer-btn" disabled onClick={() => {toggleAlgoDropdown();
-          handleVisualizeClick('BFS')}}>
+          <button className="visualizer-btn" disabled onClick={() => {
+          updateChosenAlgo('BFS')}}>
          BFS
         </button>
            </li>
           <li className="algorithm-list-item">
-          <button className="visualizer-btn" disabled onClick={() => {toggleAlgoDropdown();handleVisualizeClick('DFS')}}>
+          <button className="visualizer-btn" disabled onClick={() => {updateChosenAlgo('DFS')}}>
          DFS
         </button>
              </li>
@@ -43,8 +43,8 @@ function Navbar({handleVisualizeClick, handleAddMaze, handleClrMaze,handleSetSpe
         <button className="new-board-btn" onClick={() => handleClrMaze()}>New Board</button>
       </li>
       <li className="navbar-item "> 
-          <button className="visualizer-btn visualize-btn" onClick={() => {toggleAlgoDropdown(); handleVisualizeClick('A*')}}>
-         Visualize
+          <button className="visualizer-btn visualize-btn" onClick={() => {setAlgoDropdownOpened(false); updateShouldVisualize(true)}}>
+         Visualize {chosenAlgo}
         </button>
       </li>
       <li className="navbar-item" id="animation-speed">
