@@ -37,10 +37,10 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
         </ul>
       </li>
       <li className="navbar-item">
-        <button className="add-maze-btn" onClick={() => handleAddMaze()}>Add Maze</button>
+        <button className="add-maze-btn" onClick={() => {setAlgoDropdownOpened(false);handleAddMaze()}}>Add Maze</button>
       </li>
       <li className="navbar-item">
-        <button className="new-board-btn" onClick={() => handleClrMaze()}>New Board</button>
+        <button className="new-board-btn" onClick={() => {setAlgoDropdownOpened(false); handleClrMaze()}}>New Board</button>
       </li>
       <li className="navbar-item "> 
           <button className="visualizer-btn visualize-btn" onClick={() => {setAlgoDropdownOpened(false); updateShouldVisualize(true)}}>

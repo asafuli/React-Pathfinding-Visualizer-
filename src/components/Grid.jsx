@@ -5,7 +5,7 @@ import {findPathAstarUtils, findPathBFSUtils, findPathDFSUtils ,findPathDijkstra
 // Extracted cell outside of the function component in order to avoid reinstantiation on every Render 
 // Warning was useEffect : https://stackoverflow.com/questions/65321359/how-to-fix-warning-function-makes-the-dependencies-of-useeffect-hook-change
 
-const BOARD_ROWS = 24;
+const BOARD_ROWS = 27;
 const BOARD_COLUMNS = 60;
 
 const cell = {
