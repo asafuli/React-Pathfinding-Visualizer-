@@ -8,6 +8,13 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
     setAlgoDropdownOpened(AlgoDropdownOpened => !AlgoDropdownOpened);
   }
 
+  const handleVisualizeClicked = () => {
+
+    if(chosenAlgo === '') return;
+    setAlgoDropdownOpened(false); 
+    updateShouldVisualize(true);
+  }
+
   return (
     <ul className="navbar-list">
       <li className="navbar-item">
@@ -43,7 +50,7 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
         <button className="new-board-btn" onClick={() => {setAlgoDropdownOpened(false); handleClrMaze()}}>New Board</button>
       </li>
       <li className="navbar-item "> 
-          <button className="visualizer-btn visualize-btn" onClick={() => {setAlgoDropdownOpened(false); updateShouldVisualize(true)}}>
+          <button className="visualizer-btn visualize-btn" onClick={handleVisualizeClicked}>
          Visualize {chosenAlgo}
         </button>
       </li>
