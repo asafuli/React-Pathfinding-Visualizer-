@@ -75,6 +75,7 @@ span {
 
 .algorithms-list.opened {
   display: block;
+  z-index: 1;
   position: absolute;
   background-image: linear-gradient(to bottom right, #e1f7d5, blue);
   border: 1px solid paleturquoise;
