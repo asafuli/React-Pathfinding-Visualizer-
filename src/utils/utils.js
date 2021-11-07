@@ -299,13 +299,14 @@ let findPathDFSUtilRecursive = (
   );
 
   // traverse recuresivly over non-visited adjacent nodes of curr
+  let breakOutOfMap = false;
   currNeighbours.map((el) => {
     // skip in case node was already visited
-    if (!el || visited.includes(el) || el.isWall) return null;
+    if (!el || visited.includes(el) || el.isWall || breakOutOfMap) return null;
     el.parent = curr;
     visited.push(el);
     opened.push(el);
-    return findPathDFSUtilRecursive(
+    foundPath = findPathDFSUtilRecursive(
       start,
       end,
       grid,
@@ -313,7 +314,10 @@ let findPathDFSUtilRecursive = (
       opened,
       visited
     );
+    breakOutOfMap = foundPath;
+    return breakOutOfMap;
   });
+  return foundPath;
 };
 
 //Heuristic Chebyshev distance.
