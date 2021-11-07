@@ -37,7 +37,7 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
         </button>
            </li>
           <li className="algorithm-list-item">
-          <button className="visualizer-btn" disabled onClick={() => {updateChosenAlgo('DFS')}}>
+          <button className="visualizer-btn" onClick={() => {updateChosenAlgo('DFS')}}>
          DFS
         </button>
              </li>

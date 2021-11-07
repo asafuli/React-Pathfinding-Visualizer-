@@ -210,13 +210,46 @@ export function findPathDijkstraUtils(start, end, board) {
   return { grid, visited, path };
 }
 
+export function findPathDFSUtils(start, end, board) {
+  let [rowStart, colStart] = start;
+  let [rowEnd, colEnd] = end;
+
+  let grid = board;
+  let foundPath = false;
+  let opened = [];
+  let visited = [];
+
+  //Initialize with Start Node
+  opened.push(grid[rowStart][colStart]);
+  visited.push(grid[rowStart][colStart]);
+  opened[0].parent = opened[0];
+
+  foundPath = findPathDFSUtilRecursive(
+    start,
+    end,
+    grid,
+    foundPath,
+    opened,
+    visited
+  );
+
+  //Build path
+  let parent = grid[rowEnd][colEnd].parent;
+  let path = [];
+  if (foundPath) {
+    while (parent !== grid[rowStart][colStart]) {
+      path.push(parent);
+      parent = parent.parent;
+    }
+  }
+  return { grid, visited, path };
+}
+
 export function findPathBFSUtils(start, end, board) {
   return {};
 }
 
-export function findPathDFSUtils(start, end, board) {
-  return {};
-}
+//Initialize Grid with Heuristic - Used for A*
 
 const initGrid = ([rowStart, colStart], [rowEnd, colEnd], board) => {
   for (let i = 0; i < board.length; i++) {
@@ -230,6 +263,57 @@ const initGrid = ([rowStart, colStart], [rowEnd, colEnd], board) => {
   }
 
   return board;
+};
+
+let findPathDFSUtilRecursive = (
+  start,
+  end,
+  grid,
+  foundPath,
+  opened,
+  visited
+) => {
+  if (foundPath) return true;
+  if (opened.length === 0) return false;
+  let [rowEnd, colEnd] = end;
+  let currNeighbours = [];
+  let curr = opened.shift();
+  let gridRow, gridColumn;
+
+  // If node was not visited, mark as visited
+  if (!visited.includes(curr)) visited.push(curr);
+
+  // Found path to target
+  if (curr.gridRow === rowEnd && curr.gridColumn === colEnd) {
+    console.log('FOUND PATH', curr);
+    return true;
+  }
+
+  ({ gridColumn, gridRow } = curr);
+  // Allowing only up down left right
+  currNeighbours.push(
+    gridRow + 1 < grid.length && grid[gridRow + 1][gridColumn],
+    gridColumn > 0 && grid[gridRow][gridColumn - 1],
+    gridRow > 0 && grid[gridRow - 1][gridColumn],
+    gridColumn + 1 < grid[0].length && grid[gridRow][gridColumn + 1]
+  );
+
+  // traverse recuresivly over non-visited adjacent nodes of curr
+  currNeighbours.map((el) => {
+    // skip in case node was already visited
+    if (!el || visited.includes(el) || el.isWall) return null;
+    el.parent = curr;
+    visited.push(el);
+    opened.push(el);
+    return findPathDFSUtilRecursive(
+      start,
+      end,
+      grid,
+      foundPath,
+      opened,
+      visited
+    );
+  });
 };
 
 //Heuristic Chebyshev distance.
