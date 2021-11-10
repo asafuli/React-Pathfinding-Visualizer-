@@ -250,7 +250,7 @@ export function findPathBFSUtils(start, end, board) {
 }
 
 //Initialize Grid with Heuristic - Used for A*
-
+  
 const initGrid = ([rowStart, colStart], [rowEnd, colEnd], board) => {
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[0].length; j++) {
