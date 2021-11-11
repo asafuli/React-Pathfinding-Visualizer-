@@ -1,5 +1,5 @@
 import './styles.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Grid from './components/Grid';
 import Modal from './components/Modal';
@@ -8,8 +8,6 @@ import Title from './components/Title';
 const INCREASE_SPEED = 1;
 const DECREASE_SPEED = -1;
 const INITIAL_ANIMATION_SPEED = 100;
-const BOARD_ROWS = 27;
-const BOARD_COLUMNS = 60;
 
 function App() {
   const [shouldVisualize, setShouldVisualize] = useState(false);
@@ -21,30 +19,6 @@ function App() {
   const [triggerCreateBoard, setTriggerCreateBoard] = useState(false);
   const [modalClicked, setModalClicked] = useState(false);
   const [animationSpeed, setAnimationSpeed] = useState(INITIAL_ANIMATION_SPEED);
-  const [boardRows, setBoardRows] = useState(BOARD_ROWS);
-  const [boardColumns, setBoardColumns] = useState(BOARD_COLUMNS);
-  //Event listener for resize grid
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowResize);
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    };
-  }, []);
-
-  const handleWindowResize = (resizeEvent) => {
-    console.log(window.innerWidth);
-    if (window.innerWidth <= 425) {
-      setBoardColumns((boardColumns) => 30);
-      setBoardRows((boardRows) => 54);
-    } else if (window.innerWidth <= 768) {
-      setBoardColumns((boardColumns) => 45);
-      setBoardRows((boardRows) => 36);
-    } else {
-      setBoardColumns((boardColumns) => 60);
-      setBoardRows((boardRows) => 27);
-    }
-  };
 
   const updateShouldVisualize = (currShouldVisualize) => {
     setShouldVisualize((shouldVisualize) => currShouldVisualize);
@@ -125,8 +99,6 @@ function App() {
             handleMazeCreated={handleMazeCreated}
             animationSpeed={animationSpeed}
             modalClicked={modalClicked}
-            boardColumns={boardColumns}
-            boardRows={boardRows}
           ></Grid>
         </div>
       </div>

@@ -5,6 +5,8 @@ import {findPathAstarUtils, findPathBFSUtils, findPathDFSUtils ,findPathDijkstra
 // Extracted cell outside of the function component in order to avoid reinstantiation on every Render 
 // Warning was useEffect : https://stackoverflow.com/questions/65321359/how-to-fix-warning-function-makes-the-dependencies-of-useeffect-hook-change
 
+const BOARD_ROWS = 27;
+const BOARD_COLUMNS = 60;
 
 const cell = {
   isOpend: false,
@@ -31,8 +33,8 @@ function initializeStartAndTarget(cols, rows) {
 
   //  let colStart = 1;
   // let rowStart = 1;
-  // let colTarget = boardColumns - 1 ;
-  // let rowTarget = boardRows - 1;
+  // let colTarget = BOARD_COLUMNS - 1 ;
+  // let rowTarget = BOARD_ROWS - 1;
 
   if (colTarget === colStart && rowTarget === rowStart) {
     colTarget = (colTarget + 10) % cols;
@@ -59,7 +61,7 @@ const findPathDFS = (start, end, board) => {
 }
 
 
-function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked, animationSpeed, boardRows, boardColumns}) {
+function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked, animationSpeed}) {
 
   const [board, setBoard] = useState([]);
   const [Algorithm, setAlgorithm] = useState(chosenAlgo); 
@@ -93,12 +95,12 @@ function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBo
     if  (board.length > 0){
       let newBoard = [...board];
       if(maze && visited.length === 0){
-        for (let row = 0; row < boardRows ; row++){
-          for (let col = 0; col < boardColumns ; col++){
+        for (let row = 0; row < BOARD_ROWS ; row++){
+          for (let col = 0; col < BOARD_COLUMNS ; col++){
 
             let currCell = newBoard[row][col];
             if (!currCell.isStart && !currCell.isTarget){
-              if (row === 0 || row === boardRows - 1 || col === 0 || col === boardColumns - 1){
+              if (row === 0 || row === BOARD_ROWS - 1 || col === 0 || col === BOARD_COLUMNS - 1){
                 currCell.isWall = true;
               } else {
                 currCell.isWall = Math.random() < 0.25;
@@ -112,15 +114,15 @@ function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBo
         setBoard(board => newBoard)
       } 
       // else { 
-      //   for (let row = 0; row < boardRows ; row++){
-      //     for (let col = 0; col < boardColumns ; col++){
+      //   for (let row = 0; row < BOARD_ROWS ; row++){
+      //     for (let col = 0; col < BOARD_COLUMNS ; col++){
       //       let currCell = newBoard[row][col];
       //       currCell.isWall = false;
       //     }
       //   }
       // }
     }
-  }, [maze, board, board.length, handleMazeCreated, visited.length, boardColumns, boardRows]
+  }, [maze, board, board.length, handleMazeCreated, visited.length]
   )
 
   // Clear the board
@@ -129,8 +131,8 @@ function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBo
     if (clearBoard) board.length = 0;
     
     if (board.length === 0){
-      let rows = boardRows;
-      let cols = boardColumns;
+      let rows = BOARD_ROWS;
+      let cols = BOARD_COLUMNS;
 
       let newBoard = [];
       for (let row = 0; row < rows; row++){
@@ -160,7 +162,7 @@ function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBo
 
     }
     return () => {}
-  }, [board, clearBoard, handleBoardCleared, visited, updateChosenAlgo, updateNoPossiblePath, updateShouldVisualize, boardColumns, boardRows])
+  }, [board, clearBoard, handleBoardCleared, visited, updateChosenAlgo, updateNoPossiblePath, updateShouldVisualize])
 
 
   // Handle choosing and Algorithm and call the relevant pathfinding method 

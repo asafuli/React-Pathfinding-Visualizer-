@@ -1,6 +1,7 @@
 :root {
-  --grid-width: 60;
-  --grid-cell-width: calc(100vw / (var(--grid-width) + 0.5));
+  --grid-columns: 60;
+  --grid-cell-width: calc(100vw / (var(--grid-columns) + 0.5));
+  --grid-cell-height: var(--grid-cell-width);
 }
 
 * {
@@ -42,7 +43,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width: var(--grid-width);
+  width: calc(var(--grid-columns) / 3);
   list-style: none;
   padding: 0.5rem;
   background-image: linear-gradient(to bottom right, #e1f7d5, blue);
@@ -94,10 +95,10 @@ span {
 .grid-wrapper {
   display: grid;
   grid-template-columns: repeat(
-    var(--grid-width),
+    var(--grid-columns),
     minmax(var(--grid-cell-width), var(--grid-cell-width))
   );
-  margin: 0.2vh 0.5vw 0 0.5vw;
+  margin: 0.2vh 0vw 0.2vh 0vw;
 }
 
 .grid-cell-wrapper {
@@ -108,7 +109,7 @@ span {
 
 .grid-cell-item {
   width: var(--grid-cell-width);
-  height: var(--grid-cell-width);
+  height: var(--grid-cell-height);
   border: 1px solid #fff9ae;
 }
 
@@ -285,8 +286,7 @@ button:hover,
 
 @media only screen and (max-width: 768px) {
   :root {
-    --grid-width: 45;
-    /* --grid-cell-width: calc(100vw / (var(--grid-width) + 0.5)); */
+    --grid-cell-height: calc(var(--grid-cell-width) * 1.5);
   }
   .title {
     font-size: 4.5vw;
@@ -300,8 +300,7 @@ button:hover,
 
 @media only screen and (max-width: 425px) {
   :root {
-    --grid-width: 30;
-    /* --grid-cell-width: calc(100vw / (var(--grid-width) + 0.5)); */
+    --grid-cell-height: calc(var(--grid-cell-width) * 2);
   }
   .navbar-list {
     flex-direction: column;
