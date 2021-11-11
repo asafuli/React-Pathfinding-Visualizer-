@@ -154,7 +154,7 @@ span {
 
   100% {
     transform: scale(1);
-    background-color: #234d20;
+    background-color: #c9df8a;
   }
 }
 
@@ -171,9 +171,10 @@ span {
 }
 
 .wall-cell {
-  background-image: url('./static/images/wall.png');
+  /* background-image: url('./static/images/wall.png'); */
   background-size: var(--grid-cell-width) var(--grid-cell-height);
-  background-color: black;
+  background-color: #e12ddd;
+  border: 0px;
 }
 
 .selected {
@@ -206,7 +207,7 @@ span {
 
   100% {
     transform: scale(1);
-    background-color: #f1cbff;
+    background-color: paleturquoise;
   }
 }
 
