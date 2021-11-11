@@ -6,11 +6,12 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
   const [buttonPressed, setButtonPressed] = useState('');
 
   const handleMouseDown = (e) => {
-    setButtonPressed(buttonPressed => '+')
+    setButtonPressed(buttonPressed => e.currentTarget.innerText)
+    console.log(e.currentTarget.innerText)
   }
 
   const handleMouseUp = (e) => {
-    setButtonPressed(buttonPressed => '-')
+    setButtonPressed(buttonPressed => '')
   }
 
   const toggleAlgoDropdown = () => {
@@ -65,8 +66,8 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
       </li>
       <li className="navbar-item" id="animation-speed">
         <span>Set Animation Speed </span>
-        <button className={`set-speed-btn ${buttonPressed === '+' ? 'presses' : ''}`} onClick={() => handleSetSpeed(1)} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)} >+</button>
-        <button className={`set-speed-btn ${buttonPressed === '-' ? 'presses' : ''}`} onClick={() => handleSetSpeed(-1)} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)}>-</button>
+        <button className={`set-speed-btn ${buttonPressed === '+' ? 'pressed' : ''}`} onClick={() => handleSetSpeed(1)} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)} >+</button>
+        <button className={`set-speed-btn ${buttonPressed === '-' ? 'pressed' : ''}`} onClick={() => handleSetSpeed(-1)} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)}>-</button>
       </li>
     </ul>
   )
