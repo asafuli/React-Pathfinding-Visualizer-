@@ -1,7 +1,8 @@
 :root {
   --grid-columns: 60;
+  --grid-rows: 27;
   --grid-cell-width: calc(100vw / (var(--grid-columns) + 0.5));
-  --grid-cell-height: var(--grid-cell-width);
+  --grid-cell-height: calc(100vh / (var(--grid-rows) + 7));
 }
 
 * {
@@ -285,9 +286,6 @@ button:hover,
 }
 
 @media only screen and (max-width: 768px) {
-  :root {
-    --grid-cell-height: calc(var(--grid-cell-width) * 1.5);
-  }
   .title {
     font-size: 4.5vw;
   }
@@ -299,9 +297,6 @@ button:hover,
 }
 
 @media only screen and (max-width: 425px) {
-  :root {
-    --grid-cell-height: calc(var(--grid-cell-width) * 2);
-  }
   .navbar-list {
     flex-direction: column;
     justify-content: center !important;
