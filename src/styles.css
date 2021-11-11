@@ -3,8 +3,14 @@
   --grid-rows: 23;
   --grid-cell-width: calc(100vw / (var(--grid-columns) + 0.5));
   --grid-cell-height: calc(100vh / (var(--grid-rows) + 6));
-  --mobile-cell-height: calc(var(--grid-cell-height) * 1);
-  --tablet-cell-height: calc(var(--grid-cell-height));
+  --mobile-cell-height: min(
+    calc(var(--grid-cell-height)),
+    calc(var(--grid-cell-width)) * 2
+  );
+  --tablet-cell-height: min(
+    calc(var(--grid-cell-height)),
+    calc(var(--grid-cell-width)) * 1.5
+  );
 }
 
 * {
