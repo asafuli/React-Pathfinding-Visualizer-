@@ -3,6 +3,15 @@ import React,{useState} from 'react'
 function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMaze, handleClrMaze,handleSetSpeed, createNewBoard, }) {
 
   const [AlgoDropdownOpened, setAlgoDropdownOpened] = useState(false);
+  const [buttonPressed, setButtonPressed] = useState('');
+
+  const handleMouseDown = (e) => {
+    setButtonPressed(buttonPressed => 'pressed')
+  }
+
+  const handleMouseUp = (e) => {
+    setButtonPressed(buttonPressed => '')
+  }
 
   const toggleAlgoDropdown = () => {
     setAlgoDropdownOpened(AlgoDropdownOpened => !AlgoDropdownOpened);
@@ -18,7 +27,7 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
   return (
     <ul className="navbar-list">
       <li className="navbar-item">
-        <div className='alogrithms-list-header'>Algorithms <i className="fas fa-caret-down" onClick={() => toggleAlgoDropdown()}></i></div>
+        <div className='alogrithms-list-header ' onClick={() => toggleAlgoDropdown()}>Algorithms <i className="fas fa-caret-down" ></i></div>
         <ul className={`algorithms-list ${AlgoDropdownOpened ? 'opened' : ''}`}>
           <li className="algorithm-list-item"> 
           <button className="visualizer-btn" onClick={() => { updateChosenAlgo('A*')}}>
@@ -56,8 +65,8 @@ function Navbar({updateChosenAlgo,chosenAlgo, updateShouldVisualize, handleAddMa
       </li>
       <li className="navbar-item" id="animation-speed">
         <span>Set Animation Speed </span>
-        <button className="set-speed-btn" onClick={() => handleSetSpeed(1)}>+</button>
-        <button className="set-speed-btn" onClick={() => handleSetSpeed(-1)}>-</button>
+        <button className={`set-speed-btn ${buttonPressed}`} onClick={() => handleSetSpeed(1)} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)} >+</button>
+        <button className={`set-speed-btn ${buttonPressed}`} onClick={() => handleSetSpeed(-1)} onMouseDown={(e) => handleMouseDown(e)} onMouseUp={(e) => handleMouseUp(e)}>-</button>
       </li>
     </ul>
   )

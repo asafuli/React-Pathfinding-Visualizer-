@@ -291,6 +291,11 @@ button:hover,
 
 .set-speed-btn {
   width: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+button.set-speed-btn.pressed {
+  background-color: #c9c9ff !important;
 }
 
 @media only screen and (max-width: 768px) {
@@ -322,18 +327,21 @@ button:hover,
     align-items: center !important;
     margin-bottom: 3rem;
   }
+  .navbar-item {
+    margin-top: 2rem;
+  }
   .algorithms-list.opened {
     position: inherit;
   }
   .title {
-    font-size: 7vw;
+    font-size: 8vw;
     margin-bottom: 3rem;
     margin-top: 3rem;
   }
   button,
   div,
   span {
-    font-size: 2.5vw !important;
+    font-size: 3.5vw !important;
   }
   .target-cell,
   .starting-cell,
