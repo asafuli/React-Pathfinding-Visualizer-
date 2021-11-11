@@ -1,8 +1,10 @@
 :root {
-  --grid-columns: 60;
-  --grid-rows: 27;
+  --grid-columns: 50;
+  --grid-rows: 23;
   --grid-cell-width: calc(100vw / (var(--grid-columns) + 0.5));
-  --grid-cell-height: calc(100vh / (var(--grid-rows) + 7));
+  --grid-cell-height: calc(100vh / (var(--grid-rows) + 6));
+  --mobile-cell-height: calc(var(--grid-cell-height) * 1.5);
+  --tablet-cell-height: calc(var(--grid-cell-height) * 1.24);
 }
 
 * {
@@ -286,6 +288,9 @@ button:hover,
 }
 
 @media only screen and (max-width: 768px) {
+  .grid-cell-item {
+    height: var(--tablet-cell-height);
+  }
   .title {
     font-size: 4.5vw;
   }
@@ -294,9 +299,17 @@ button:hover,
   span {
     font-size: 1.75vw !important;
   }
+  .target-cell,
+  .starting-cell,
+  .wall-cell {
+    background-size: var(--grid-cell-width) var(--tablet-cell-height);
+  }
 }
 
 @media only screen and (max-width: 425px) {
+  .grid-cell-item {
+    height: var(--mobile-cell-height);
+  }
   .navbar-list {
     flex-direction: row;
     justify-content: center !important;
@@ -310,8 +323,9 @@ button:hover,
   span {
     font-size: 2.5vw !important;
   }
-  /* .algorithms-list.opened {
-    position: absolute;
-    margin-left: 20rem;
-  } */
+  .target-cell,
+  .starting-cell,
+  .wall-cell {
+    background-size: var(--grid-cell-width) var(--tablet-cell-height);
+  }
 }
