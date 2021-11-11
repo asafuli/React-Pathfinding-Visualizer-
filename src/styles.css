@@ -1,10 +1,10 @@
 :root {
-  --grid-columns: 50;
+  --grid-columns: 57;
   --grid-rows: 23;
   --grid-cell-width: calc(100vw / (var(--grid-columns) + 0.5));
   --grid-cell-height: calc(100vh / (var(--grid-rows) + 6));
-  --mobile-cell-height: calc(var(--grid-cell-height) * 1.5);
-  --tablet-cell-height: calc(var(--grid-cell-height) * 1.24);
+  --mobile-cell-height: calc(var(--grid-cell-height) * 1);
+  --tablet-cell-height: calc(var(--grid-cell-height));
 }
 
 * {

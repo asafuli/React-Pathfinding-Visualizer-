@@ -6,7 +6,7 @@ import {findPathAstarUtils, findPathBFSUtils, findPathDFSUtils ,findPathDijkstra
 // Warning was useEffect : https://stackoverflow.com/questions/65321359/how-to-fix-warning-function-makes-the-dependencies-of-useeffect-hook-change
 
 const BOARD_ROWS = 23;
-const BOARD_COLUMNS = 50;
+const BOARD_COLUMNS = 57;
 
 const cell = {
   isOpend: false,
