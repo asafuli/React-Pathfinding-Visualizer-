@@ -111,7 +111,7 @@ span {
 .grid-cell-item {
   width: var(--grid-cell-width);
   height: var(--grid-cell-height);
-  border: 1px solid #fff9ae;
+  border: calc(var(--grid-cell-width) / 100) solid #fff9ae;
 }
 
 .grid-cell-item:hover {
@@ -152,19 +152,19 @@ span {
 
 .starting-cell {
   background-image: url('./static/images/start.jpg') !important;
-  background-size: cover;
+  background-size: var(--grid-cell-width) var(--grid-cell-height);
   background-color: black;
 }
 
 .target-cell {
   background-image: url('./static/images/end.jpg') !important;
-  background-size: cover;
+  background-size: var(--grid-cell-width) var(--grid-cell-height);
   background-color: black;
 }
 
 .wall-cell {
   background-image: url('./static/images/wall.png');
-  background-size: cover;
+  background-size: var(--grid-cell-width) var(--grid-cell-height);
   background-color: black;
 }
 
