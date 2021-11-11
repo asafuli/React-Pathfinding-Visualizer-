@@ -317,12 +317,18 @@ button:hover,
     height: var(--mobile-cell-height);
   }
   .navbar-list {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center !important;
     align-items: center !important;
+    margin-bottom: 3rem;
+  }
+  .algorithms-list.opened {
+    position: inherit;
   }
   .title {
     font-size: 7vw;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
   }
   button,
   div,
