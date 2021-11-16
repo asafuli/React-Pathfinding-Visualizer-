@@ -2,7 +2,7 @@
 
 ## Purpose
 
-  Hopefully this simple project can help develop intuition for how few of the basic pathfinding Algorithms are performing
+  Hopefully this simple project can help develop intuition for how few of the basic pathfinding Algorithms are actually working in action
 
 ### Supported Algorithms
 
