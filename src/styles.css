@@ -1,8 +1,8 @@
 :root {
   --grid-columns: 57;
   --grid-rows: 23;
-  --grid-cell-width: calc(100vw / (var(--grid-columns) + 0.5));
-  --grid-cell-height: calc(100vh / (var(--grid-rows) + 6));
+  --grid-cell-width: calc(100vw / (var(--grid-columns) + 0.6));
+  --grid-cell-height: calc(100vh / (var(--grid-rows) + 6.4));
   --mobile-cell-height: min(
     calc(var(--grid-cell-height)),
     calc(var(--grid-cell-width)) * 2

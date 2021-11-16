@@ -61,7 +61,7 @@ const findPathDFS = (start, end, board) => {
 }
 
 
-function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked, animationSpeed}) {
+function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBoard , handleBoardCleared, updateNoPossiblePath, noPossiblePath, triggerCreateBoard, updateChosenAlgo, handleMazeCreated, modalClicked, animationSpeed, initModalClicked}) {
 
   const [board, setBoard] = useState([]);
   const [Algorithm, setAlgorithm] = useState(chosenAlgo); 
@@ -158,11 +158,12 @@ function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBo
       updateChosenAlgo('None')
       updateNoPossiblePath(false);
       handleBoardCleared();
-      updateShouldVisualize(false)
+      updateShouldVisualize(false);
+      initModalClicked(false);
 
     }
     return () => {}
-  }, [board, clearBoard, handleBoardCleared, visited, updateChosenAlgo, updateNoPossiblePath, updateShouldVisualize])
+  }, [board, clearBoard, handleBoardCleared, visited, updateChosenAlgo, updateNoPossiblePath, updateShouldVisualize, initModalClicked])
 
 
   // Handle choosing and Algorithm and call the relevant pathfinding method 
@@ -254,7 +255,7 @@ function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBo
         debugger
         updateNoPossiblePath(true);
         updateChosenAlgo('None');
-        updateShouldVisualize(false)
+        updateShouldVisualize(false);
       }
 
       let paintSelectedInterval = setTimeout(() => {

@@ -54,7 +54,7 @@ function App() {
   };
 
   const handleModalClicked = () => {
-    if (noPossiblePath) {
+    if (noPossiblePath && !modalClicked) {
       setNoPossiblePath((noPossiblePath) => false);
       setModalClicked((modalClicked) => true);
     }
@@ -99,6 +99,7 @@ function App() {
             handleMazeCreated={handleMazeCreated}
             animationSpeed={animationSpeed}
             modalClicked={modalClicked}
+            initModalClicked={setModalClicked}
           ></Grid>
         </div>
       </div>
