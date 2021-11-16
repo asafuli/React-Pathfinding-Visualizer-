@@ -7,9 +7,9 @@ Hopefully this simple project can help develop intuition for how few of the basi
 ### Supported Algorithms
 
 Currently supporting:
-[1.Depth first search (DFS)](https://en.wikipedia.org/wiki/Depth-first_search)
-[2.Dijkstra](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
-[1.A\*)](https://en.wikipedia.org/wiki/A*_search_algorithm)
+[1.Depth first search (DFS)](https://en.wikipedia.org/wiki/Depth-first_search)  
+[2.Dijkstra](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)  
+[2.A\*)](https://en.wikipedia.org/wiki/A*_search_algorithm)  
 
 ## How to run?
 
