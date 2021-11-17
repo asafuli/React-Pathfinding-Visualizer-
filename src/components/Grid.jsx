@@ -235,6 +235,7 @@ function Grid({shouldVisualize, updateShouldVisualize, chosenAlgo, maze, clearBo
           return;
         }
         visited[visitedCounter].visited = true;
+        debugger
         setVisitedCounter(visitedCounter => visitedCounter + 1);
         return setVisited(visited => visited)
        } 

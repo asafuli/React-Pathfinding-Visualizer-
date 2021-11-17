@@ -22,7 +22,7 @@ function GridCell({cellData, id, onClick}) {
     setData(Data => cellData)
     return () => { 
     };
-  }, [cellData])
+  }, [cellData.selected, cellData.isStart, cellData.isTarget, cellData.visited, cellData.isWall, cellData])
 
 
   return (
